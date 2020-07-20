@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "302940369724",
+    "firebase_url": "https://thinker-investor.firebaseio.com",
+    "project_id": "thinker-investor",
+    "storage_bucket": "thinker-investor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302940369724:android:6bfbf2d3a64074c7c1e439",
+        "android_client_info": {
+          "package_name": "com.afkar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "302940369724-jcshidu97v9s2nc4ja206dsvbsbhrlp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQUla0-ZLgibVw1MoLWu8qjpMpE8i4HDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "302940369724-jcshidu97v9s2nc4ja206dsvbsbhrlp5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
