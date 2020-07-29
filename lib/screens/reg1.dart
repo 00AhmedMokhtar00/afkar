@@ -215,7 +215,7 @@ class _Reg1State extends State<Reg1> {
                             message = "كلمة المرور غير متطابقة";
                           });
                             }else{
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> Reg2(_image, conName.text, codeNational,conEmail.text, conPass.text) ));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> Reg2(_image, conName.text, "$codeNational${conPhone.text}",conEmail.text, conPass.text) ));
                             }
                           }else{
                           setState(() {

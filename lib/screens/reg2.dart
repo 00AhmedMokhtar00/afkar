@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:afkar/login.dart';
-import 'package:afkar/screens/articles.dart';
 import 'package:afkar/screens/verifyAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -105,8 +103,9 @@ class _Reg2State extends State<Reg2> {
     );
   }
   Future reg(BuildContext context)async{
-    try{var url = "https://afkarestithmar.com/api/api.php?type=reginvest&phone=${widget.phone}&pass=${widget.pass}&name=${widget.name}&email=${widget.email}&address=&about=${conAbout.text}&price=1&domain_id=1";
+    try{var url = "https://afkarestithmar.com/api/api.php?type=reginvest&phone=${widget.phone.trim()}&pass=${widget.pass.trim()}&name=${widget.name.trim()}&email=${widget.email.trim()}&address=adress&about=${conAbout.text.trim()}&price=1&domain_id=1";
         var request = await http.get(url);
+        print(request.body);
         var data = jsonDecode(request.body);
         if("${data['success']}"== "1"){
           print(data);
