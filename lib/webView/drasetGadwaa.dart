@@ -214,14 +214,14 @@ class _HesabElNesabState extends State<HesabElNesab> {
     final double totalRasElmal                  = rasElmal + fekraVlaue;
     final double investorShare                  = 100 - thinkerShare;
     final double rasElmalProfit                 = double.parse(_rasElmalProfitController.text);
-    final double projectProfit                  = totalRasElmal * rasElmalProfit;
-    final double investorNetProfit              = projectProfit * investorShare;
-    final double thinkerNetProfit               = projectProfit * thinkerShare;
-    final double investorProfit                 = investorNetProfit / investorShare;
-    final double thinkerProfit                  = thinkerNetProfit / thinkerShare;
+    final double projectProfit                  = totalRasElmal * rasElmalProfit / 100;
+    final double investorNetProfit              = projectProfit * investorShare / 100;
+    final double thinkerNetProfit               = projectProfit * thinkerShare / 100;
+    final double investorProfit                 = investorNetProfit / totalRasElmal * 100;
+    final double thinkerProfit                  = thinkerNetProfit / fekraVlaue * 100;
     final double rasElmalRefundDuration         = totalRasElmal / projectProfit;
     final double investorRasElmalRefundDuration = totalRasElmal / investorNetProfit;
-    final double thinkerRasElmalRefundDuration  = totalRasElmal / thinkerNetProfit;
+    final double thinkerRasElmalRefundDuration  = fekraVlaue / thinkerNetProfit;
 
     return NesabModel(
         rasElmal: rasElmal,
