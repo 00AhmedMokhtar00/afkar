@@ -271,7 +271,7 @@ class Cont1AddMofaker extends StatefulWidget {
 
 class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
   @override
-  File _image;
+  File _file1, _file2;
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -332,15 +332,16 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
                 //     ],
                 //     onSelected: (String selected) => print(selected)),
                 GestureDetector(
-                  onTap: () {
-                    _pickImageFromGallery();
+                  onTap: () async{
+                    _file1 = await _pickImageFromGallery();
+                    setState(() {});
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: 20),
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     color: Colors.white,
-                    child: _image == null
+                    child: _file1 == null
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -351,7 +352,7 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
                               ),
                               SizedBox(width: 5),
                               Text(
-                                "اضافة مرفق جديد",
+                                "اضافة دراسة جدوى",
                                 style: TextStyle(
                                     fontSize: 15, color: Colors.black),
                                 textAlign: TextAlign.right,
@@ -363,6 +364,41 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
                             style: TextStyle(fontSize: 15, color: Colors.green),
                             textAlign: TextAlign.right,
                           ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () async{
+                    _file2 = await _pickImageFromGallery();
+                    setState(() {});
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20),
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    color: Colors.white,
+                    child: _file1 == null
+                        ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage("images/upload.png"),
+                          width: 32,
+                          height: 32,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          "اضافة تقرير حساب النسب",
+                          style: TextStyle(
+                              fontSize: 15, color: Colors.black),
+                          textAlign: TextAlign.right,
+                        ),
+                      ],
+                    )
+                        : Text(
+                      "تم اضافة المرفق بنجاح",
+                      style: TextStyle(fontSize: 15, color: Colors.green),
+                      textAlign: TextAlign.right,
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -396,7 +432,11 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
                                       widget.state,
                                       widget.about,
                                       widget.code,
-                                      _image)));
+                                      _file1,
+                                      _file2
+                                  )
+                              )
+                          );
                         },
                         child: Container(
                           alignment: Alignment.center,
@@ -415,12 +455,8 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
     );
   }
 
-  _pickImageFromGallery() async {
-    File file = await FilePicker.getFile();
-
-    setState(() {
-      _image = file;
-    });
+  Future<File>_pickImageFromGallery() async {
+    return await FilePicker.getFile();
   }
 }
 
@@ -432,8 +468,8 @@ class Cont2AddMofaker extends StatefulWidget {
   final String data;
   final String about;
   final String code;
-  final File _image;
-  Cont2AddMofaker(this.title, this.price,this.per ,this.data , this.state, this.about, this.code , this._image);
+  final File _file1, _file2;
+  Cont2AddMofaker(this.title, this.price,this.per ,this.data , this.state, this.about, this.code , this._file1, this._file2);
 
   @override
   _Cont2AddMofakerState createState() => _Cont2AddMofakerState();
@@ -467,11 +503,11 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
                         style: TextStyle(fontSize: 18, color: Colors.black)),
                     Text("${widget.about}",
                         style: TextStyle(fontSize: 18, color: Colors.black)),
-                    widget._image != null?Image(
-                        image: FileImage(widget._image),
-                        fit: BoxFit.contain,
-                        width: 80,
-                        height: 80):Container()
+
+                    Text("${widget._file1.path}",
+                        style: TextStyle(fontSize: 18, color: Colors.black)),
+                    Text("${widget._file2.path}",
+                        style: TextStyle(fontSize: 18, color: Colors.black)),
                   ],
                 ),
               ),
@@ -481,13 +517,21 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
             GestureDetector(
               onTap: () async{
                 setState(() => isLoading = true);
-                if(widget._image != null){
-                  await uploadAnyPhoto(widget._image).then((ur){
-                    getTalabaty(context , "userfiles/$ur");
-                  });
-                
+                if(widget._file1 != null || widget._file2 != null){
+                  if(widget._file1 != null){
+                    final String path1 = await uploadAnyPhoto(widget._file1);
+                    if(widget._file2 != null){
+                      final String path2 = await uploadAnyPhoto(widget._file2);
+                      await getTalabaty(context , "userfiles/$path1", "userfiles/$path2");
+                    }else{
+                      await getTalabaty(context , "userfiles/$path1", "");
+                    }
+                  }else {
+                    final String path2 = await uploadAnyPhoto(widget._file2);
+                    await getTalabaty(context , "", "userfiles/$path2");
+                  }
                 }else{
-                  await getTalabaty(context , "");
+                  await getTalabaty(context , "", "");
                 }
 
                 setState(() => isLoading = false);
@@ -507,7 +551,7 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
     );
   }
   // TODO
-  Future getTalabaty(BuildContext context , String ur)async{
+  Future getTalabaty(BuildContext context , String ur, String ur2)async{
     AppState appState = Provider.of<AppState>(context,listen: false);
     try{
       var url = "https://afkarestithmar.com/api/api.php?type=addrequest&domain_id=${widget.data}&proposed_price=${widget.price}&status=${widget.state}&details=${widget.about}&title=${widget.title}&user_id=${appState.getid}&promocode=${widget.code}&attach=$ur&invest_per=${widget.per}";
@@ -602,3 +646,5 @@ class Cont3AddMofaker extends StatelessWidget {
             ))));
   }
 }
+
+
