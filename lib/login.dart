@@ -16,7 +16,7 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   String message = "";
-  String codeNational = "";
+  String codeNational = "20";
   bool isLoading = false;
 
   final TextEditingController _emailController = new TextEditingController();
@@ -77,7 +77,7 @@ class _LogInState extends State<LogIn> {
                                         });
                                       },
                                       // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                                      initialSelection: 'IT',
+                                      initialSelection: 'EG',
                                       favorite: ['+966', 'SA'],
                                       // optional. Shows only country name and flag
                                       showCountryOnly: false,

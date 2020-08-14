@@ -30,7 +30,7 @@ class _IdeasInvestorsState extends State<IdeasInvestors> {
     return Scaffold(
       backgroundColor: Color(0xfff4f4f4),
       appBar:appBar3(context , "الافكار"),
-      bottomNavigationBar: bottomNvBar(context , index:2) ,
+      bottomNavigationBar: bottomNvBar(context , index:1) ,
       body:Container(
         margin: EdgeInsets.only(top:5),
         width: MediaQuery.of(context).size.width,
@@ -51,6 +51,8 @@ class _IdeasInvestorsState extends State<IdeasInvestors> {
   }
   Future getallideas(BuildContext context )async{
     AppState appState = Provider.of<AppState>(context,listen: false);
+
+    print("MOKHTAR: " + appState.getid);
     try{var url = "https://afkarestithmar.com/api/api.php?type=afkar&user_id=${appState.getid}";
         var request = await http.get(url);
         var data = jsonDecode(request.body);

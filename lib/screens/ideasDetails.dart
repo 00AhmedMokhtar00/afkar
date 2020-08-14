@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:afkar/alerts/alerts.dart';
+import 'package:afkar/appBarTools/messages.dart';
+import 'package:afkar/profile/chat.dart';
+import 'package:afkar/profile/massegs.dart';
 import 'package:afkar/screens/sendFeedback.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -67,11 +70,12 @@ class _IdeasDetailsState extends State<IdeasDetails> {
                       mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                       children:<Widget>[
                       GestureDetector(
-                        onTap: (){
+                        onTap: ()async{
+
                          if(conMoney.text.trim() != ""){
-                           acceptRequest(context);
+                          await acceptRequest(context);
                          }else{
-                           alertTost("من فضلك ادخل قيمة للقبول");
+                           await alertTost("من فضلك ادخل قيمة للقبول");
                          }
                         },
                                               child: Container(
@@ -106,16 +110,22 @@ class _IdeasDetailsState extends State<IdeasDetails> {
   Future acceptRequest(BuildContext context)async{
     AppState appState = Provider.of<AppState>(context,listen: false);
     try{var url = "https://afkarestithmar.com/api/api.php?type=accept_req&req_id=${widget.id}&price=${conMoney.text}&invest_id=${appState.getid}";
-        var request = await http.get(url);
+        print("MOKHTAR:  " + url);
+        http.Response request = await http.get(url);
         var data = jsonDecode(request.body);
-        if("${data['success']}"== "1"){
-          print(data);
-          Navigator.pop(context);
-          Navigator.pop(context);
+        if(request.statusCode == 200){
+          print("MOKHTR: D " + data.toString());
+          await Navigator.push(context, MaterialPageRoute(
+              builder: (BuildContext _) => Massegs(appState.getid)
+          )
+          );
+//          Navigator.pop(context);
+//          Navigator.pop(context);
           alertTost(data['message']);
         } 
     }catch(e){
       print(e);
     }
+    print("IS IT DONE?");
 }
 }

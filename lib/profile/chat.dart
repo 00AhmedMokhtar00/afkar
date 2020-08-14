@@ -41,6 +41,7 @@ class _ChatState extends State<Chat> {
         },
         ),
       ),
+
       body:Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

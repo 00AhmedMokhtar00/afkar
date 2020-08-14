@@ -9,6 +9,7 @@ import 'package:afkar/screens/dataSource.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:afkar/AppBar1.dart/appBar2.dart';
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:material_dropdown_formfield/material_dropdown_formfield.dart';
 
 class AddMofaker extends StatefulWidget {
@@ -415,10 +416,10 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
   }
 
   _pickImageFromGallery() async {
-    File image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    File file = await FilePicker.getFile();
 
     setState(() {
-      _image = image;
+      _image = file;
     });
   }
 }
@@ -439,6 +440,7 @@ class Cont2AddMofaker extends StatefulWidget {
 }
 
 class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -465,26 +467,30 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
                         style: TextStyle(fontSize: 18, color: Colors.black)),
                     Text("${widget.about}",
                         style: TextStyle(fontSize: 18, color: Colors.black)),
-                    Image(
+                    widget._image != null?Image(
                         image: FileImage(widget._image),
                         fit: BoxFit.contain,
                         width: 80,
-                        height: 80)
+                        height: 80):Container()
                   ],
                 ),
               ),
             ),
             SizedBox(height: 20),
+            isLoading?Center(child: CircularProgressIndicator()):Container(),
             GestureDetector(
-              onTap: () {
+              onTap: () async{
+                setState(() => isLoading = true);
                 if(widget._image != null){
-                  uploadAnyPhoto(widget._image).then((ur){
+                  await uploadAnyPhoto(widget._image).then((ur){
                     getTalabaty(context , "userfiles/$ur");
                   });
                 
                 }else{
-                  getTalabaty(context , "");
+                  await getTalabaty(context , "");
                 }
+
+                setState(() => isLoading = false);
               },
               child: Container(
                 alignment: Alignment.center,
@@ -500,10 +506,12 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
       ),
     );
   }
+  // TODO
   Future getTalabaty(BuildContext context , String ur)async{
     AppState appState = Provider.of<AppState>(context,listen: false);
-    try{var url = "https://afkarestithmar.com/api/api.php?type=addrequest&domain_id=${widget.data}&proposed_price=${widget.price}&status=${widget.state}&details=${widget.about}&title=${widget.title}&user_id=${appState.getid}&promocode=${widget.code}&attach=$ur&invest_per=${widget.per}";
-        var request = await http.get(url);
+    try{
+      var url = "https://afkarestithmar.com/api/api.php?type=addrequest&domain_id=${widget.data}&proposed_price=${widget.price}&status=${widget.state}&details=${widget.about}&title=${widget.title}&user_id=${appState.getid}&promocode=${widget.code}&attach=$ur&invest_per=${widget.per}";
+      var request = await http.get(url);
         var data = jsonDecode(request.body);
         if("${data['success']}"== "1"){
           print(data);

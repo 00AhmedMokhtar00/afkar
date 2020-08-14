@@ -66,7 +66,7 @@ class _TalabatyState extends State<Talabaty> {
     }
 }
 
-  Widget talabatyCard(BuildContext context , name ,String id){
+  Widget talabatyCard(BuildContext context , String name ,String id){
     return GestureDetector(
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Offers(id)));
@@ -88,7 +88,7 @@ class _TalabatyState extends State<Talabaty> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text("$name" , style: TextStyle(color:Colors.black54, fontSize: 15),),
+            Text(name.length > 25? name.substring(0,24)+" ...":name, style: TextStyle(color:Colors.black54, fontSize: 15),),
             Text("#$id" , style: TextStyle(color:Colors.black54, fontSize: 15),),
           ],
         ),

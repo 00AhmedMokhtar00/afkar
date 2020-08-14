@@ -80,7 +80,7 @@ return Drawer(
                 child: customListElement(context,"حساب النسب", "images/terms2.png")),
                 GestureDetector(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DrasetGadwaa()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DrasetGadwaa(appState.getid)));
                 },  
                 child: customListElement(context,"دراسة جدوي", "images/terms2.png")),
                 ],

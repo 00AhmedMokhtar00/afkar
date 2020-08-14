@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 Widget bottomNvBar(BuildContext context , {int index}){
   AppState appState =Provider.of<AppState>(context,listen: false);
+  print("MMMMMMMMMMM: " + index.toString());
   return Container(
         width:MediaQuery.of(context).size.width,
         height: 60,
@@ -21,8 +22,7 @@ Widget bottomNvBar(BuildContext context , {int index}){
           children: <Widget>[
             GestureDetector(
               onTap: (){
-                if(index != 1)
-               {
+                if(index != 1) {
                 appState.gettyper != "think"? Navigator.push(context, MaterialPageRoute(builder: (context)=>IdeasInvestors())):Navigator.push(context, MaterialPageRoute(builder: (context)=>AddMofaker()));
                }
               },
@@ -30,7 +30,8 @@ Widget bottomNvBar(BuildContext context , {int index}){
               width:MediaQuery.of(context).size.width*0.23,
               height: 60,
               color: index == 1 ? Colors.black12 : Theme.of(context).primaryColor,
-              child: appState.gettyper != "think"? Column(
+              child: appState.gettyper != "think"?
+              Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:<Widget>[
                   Image(image: AssetImage("images/add.png"),width: 35,height: 30,),
@@ -58,7 +59,7 @@ Widget bottomNvBar(BuildContext context , {int index}){
               ),
             ),
             Container(color: Color(0xffe2e2e2),height: 40,width: 1,),
-              GestureDetector(
+            GestureDetector(
                 onTap: (){
                   if(index != 3)
                {

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart'as dio;
 import 'package:mime/mime.dart';
 import 'package:http_parser/http_parser.dart';
 
-Future<String> uploadAnyPhoto(File profileImage) async {
+Future<String> uploadAnyPhoto(File profileImage, {bool isFile = false}) async {
     var profileMediaType = {
     lookupMimeType(profileImage.path).split('/')[0]:
         lookupMimeType(profileImage.path).split('/')[1]

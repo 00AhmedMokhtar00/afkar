@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>302940369724-3a4l7l4li81s5t4mgl81haokqpqf9bai.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.302940369724-3a4l7l4li81s5t4mgl81haokqpqf9bai</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBk2wxHuWboEL3zZ41UOOrGTd8In5yQ0qo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>302940369724</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.afkar</string>
+	<key>PROJECT_ID</key>
+	<string>thinker-investor</string>
+	<key>STORAGE_BUCKET</key>
+	<string>thinker-investor.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:302940369724:ios:950dbaec2c045c46c1e439</string>
+	<key>DATABASE_URL</key>
+	<string>https://thinker-investor.firebaseio.com</string>
+</dict>
+</plist>

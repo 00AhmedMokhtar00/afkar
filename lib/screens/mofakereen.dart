@@ -151,7 +151,7 @@ class _MofakereenState extends State<Mofakereen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text("$name" , style: TextStyle(color:Colors.black54, fontSize: 14),),
-                    Text("$about" , style: TextStyle(color:Colors.black54, fontSize: 12),),
+                    Text(about.length > 40? about.substring(0,39) + " ...":about , style: TextStyle(color:Colors.black54, fontSize: 12),),
                   ],
                 ),
               ],

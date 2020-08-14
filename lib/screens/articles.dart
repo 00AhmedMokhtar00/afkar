@@ -69,12 +69,12 @@ class _ArticlesState extends State<Articles> {
     );
   }
 
-  Widget makalat(context , title , img , detail){
+  Widget makalat(context , title , img , String detail){
     return Container(
               margin: EdgeInsets.only(top:10),
               color:Colors.white,
               width:MediaQuery.of(context).size.width,
-              height: 370,
+              height: MediaQuery.of(context).size.height * 0.5,
               child: Column(
                 children:<Widget>[
                   Container(
@@ -86,34 +86,36 @@ class _ArticlesState extends State<Articles> {
                   height: 220,
                   width: MediaQuery.of(context).size.width,  
                   child: Image(image: NetworkImage("https://afkarestithmar.com/$img"),fit: BoxFit.contain,)),
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
               children:<Widget>[
                 Container(
-                        alignment: Alignment.center,
-                        width:MediaQuery.of(context).size.width*0.63 ,
-                        height: 68,
-                        child: Text("$detail" ,style:TextStyle(fontSize:11 , color: Colors.black54)),
-                      ),
+                          alignment: Alignment.center,
+                          width:MediaQuery.of(context).size.width*0.63 ,
+                          height: 68,
+                          child: Text("$detail" ,style:TextStyle(fontSize:11 , color: Colors.black54)),
+                        ),
                 Container(color: Colors.black12,height: 70,width: 1,),
                 GestureDetector(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Makalah(title, img, detail)));
-                  },
-                                  child: Container(
-                          alignment: Alignment.center,
-                          width: 100,
-                          height: 40,
-                          color: Theme.of(context).primaryColor,
-                          child: Text("عرض المزيد" ,style:TextStyle(fontSize:13 , color: Colors.white)),
-                        ),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Makalah(title, img, detail)));
+                    },
+                                    child: Container(
+                            alignment: Alignment.center,
+                            width: 100,
+                            height: 40,
+                            color: Theme.of(context).primaryColor,
+                            child: Text("عرض المزيد" ,style:TextStyle(fontSize:13 , color: Colors.white)),
+                          ),
                 ),
 
               ]
             ),
+                    ),
                   )
                 ]
               ),
