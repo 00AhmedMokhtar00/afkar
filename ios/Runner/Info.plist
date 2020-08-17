@@ -27,12 +27,26 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Accessing Music to collect your data and send it to the investor</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Accessing your calendar to get appointments</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Acessing your Camera to upload your personal photos</string>
+	<string>Accessing your Camera to upload your personal photos</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Accessing the contact usage to get the data to sign in</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Accessing your location data to provide better experience and comfort</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Accessing your location data to provide better experience</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Acessing your Microphone to upload your personal audio</string>
+	<string>Accessing your Microphone to upload your personal audio</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Accessing motion </string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Acessing your Gallery to upload your personal photos</string>
+	<string>Accessing your Gallery to upload your personal photos</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Enabling speech recognition</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
