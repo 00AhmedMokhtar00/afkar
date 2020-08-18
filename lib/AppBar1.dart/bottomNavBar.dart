@@ -6,6 +6,7 @@ import 'package:afkar/screens/ideasInestor.dart';
 import 'package:afkar/screens/ideasThatAccepted.dart';
 import 'package:afkar/screens/mofakereen.dart';
 import 'package:afkar/screens/mostasmerList.dart';
+import 'package:afkar/screens/orders/orders.dart';
 import 'package:afkar/screens/talabaty.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ Widget bottomNvBar(BuildContext context , {int index}){
             GestureDetector(
               onTap:(){
                 if(index != 2)
-               {appState.gettyper != "think"?Navigator.push(context, MaterialPageRoute(builder: (context)=>IdeasThatAccepted())):Navigator.push(context, MaterialPageRoute(builder: (context)=>Talabaty()));}
+               {appState.gettyper != "think"?Navigator.push(context, MaterialPageRoute(builder: (context)=>IdeasThatAccepted())):Navigator.push(context, MaterialPageRoute(builder: (context)=>Orders()));}
               },
               child: Container(
                 width:MediaQuery.of(context).size.width*0.25,

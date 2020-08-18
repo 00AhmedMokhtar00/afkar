@@ -33,7 +33,7 @@ class _ArticlesState extends State<Articles> {
       key: _scaffoldKey ,
       appBar:appBar(context , _scaffoldKey),
       bottomNavigationBar: bottomNvBar(context),
-      body:Container(
+      body: Container(
         width:MediaQuery.of(context).size.width,
         height:MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
@@ -128,7 +128,6 @@ class _ArticlesState extends State<Articles> {
         var data = jsonDecode(request.body);
 
         if("${data['success']}"== "1"){
-          print(data);
           for (var i = 0; i < data["articles"].length; i++) {
              titles.add(data["articles"][i]["title"]);
              images.add(data["articles"][i]["img"]);

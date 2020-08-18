@@ -131,7 +131,6 @@ class _MyAppState extends State<MyApp> {
                 // Return your login here
                 return HomePage();
               }
-
               // Return your home here
               return Articles();
             } else {
