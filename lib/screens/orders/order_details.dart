@@ -249,14 +249,10 @@ class _OrderDetailsState extends State<OrderDetails> {
           children: [
             _mainTitle("المرفقات"),
 
-            orderModel.attachments != null?
-            {
               ...orderModel.attachments.map((attachment) =>
                 _attachmentItem(title: attachment.toString().replaceAll("userfiles", ""), filePath: attachment.toString())
               ).toList()
-            }
-            :
-            Center(child: Text("لا يوجد مرفقات"))
+
           ],
         ),
       ),
@@ -276,8 +272,9 @@ class _OrderDetailsState extends State<OrderDetails> {
           children: [
             PDF.network(
               'https://invideas.com/$filePath',
-              height: MediaQuery.of(context).size.height * 0.25,
+              //height: MediaQuery.of(context).size.height * 0.25,
               width: MediaQuery.of(context).size.width,
+
             )
 
           ],

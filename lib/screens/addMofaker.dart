@@ -376,7 +376,7 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     color: Colors.white,
-                    child: _file1 == null
+                    child: _file2 == null
                         ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -554,7 +554,8 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
   Future getTalabaty(BuildContext context , String ur, String ur2)async{
     AppState appState = Provider.of<AppState>(context,listen: false);
     try{
-      var url = "https://afkarestithmar.com/api/api.php?type=addrequest&domain_id=${widget.data}&proposed_price=${widget.price}&status=${widget.state}&details=${widget.about}&title=${widget.title}&user_id=${appState.getid}&promocode=${widget.code}&attach=$ur&invest_per=${widget.per}";
+      var url = "https://afkarestithmar.com/api/api.php?type=addrequest&domain_id=${widget.data}&proposed_price=${widget.price}&status=${widget.state}&details=${widget.about}&title=${widget.title}&user_id=${appState.getid}&promocode=${widget.code}&attachs=\'$ur\',\'$ur2\'&invest_per=${widget.per}";
+      print(url);
       var request = await http.get(url);
         var data = jsonDecode(request.body);
         if("${data['success']}"== "1"){
@@ -566,7 +567,7 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
         } 
     }catch(e){
       print(e);
-      alertTost(e);
+      alertTost(e.toString());
     }
 }
 }
