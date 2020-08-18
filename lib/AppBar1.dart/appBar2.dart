@@ -28,8 +28,8 @@ Widget appBar3(BuildContext context , String title){
         leading: IconButton(icon: Icon(Icons.arrow_back_ios),
         color: Colors.black54,
          onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (_) => Articles()));
-          //Navigator.pop(context);
+          //Navigator.push(context, MaterialPageRoute(builder: (_) => Articles()));
+          Navigator.pop(context);
         }),
         title: Text("$title" , style: TextStyle(color:Colors.white),),
       );
