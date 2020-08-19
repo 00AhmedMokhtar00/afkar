@@ -53,7 +53,7 @@ class _DrasetGadwaaState extends State<DrasetGadwaa> {
               _controller.complete(webViewController);
             },
             navigationDelegate: (NavigationRequest request) async{
-              Navigator.push(context, MaterialPageRoute(builder: (_) => PreviewFile(request.url)));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => PreviewFile(request.url, "دراسة الجدوى")));
               return NavigationDecision.navigate;
             },
           ),

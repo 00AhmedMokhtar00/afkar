@@ -10,6 +10,7 @@ import 'package:afkar/models/thinker/order_model.dart';
 import 'package:afkar/screens/orders/order_details.dart';
 
 import '../../main.dart';
+import 'Idea_details.dart';
 
 class Ideas extends StatefulWidget {
   @override
@@ -190,12 +191,13 @@ class _IdeasState extends State<Ideas> {
 
   _onOrderPressed(OrderModel orderModel){
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => OrderDetails(orderModel: orderModel))
+        context, MaterialPageRoute(builder: (context) => IdeaDetails(orderModel: orderModel))
     );
   }
 
 
   Future<List<OrderModel>> _getMyOrders()async{
+
     AppState appState = Provider.of<AppState>(context,listen: false);
 
     try{
@@ -215,7 +217,8 @@ class _IdeasState extends State<Ideas> {
         orderModels.addAll(
             ordersData.map(
                     (order) => OrderModel(
-                    userId: appState.getid,
+                      // TODO
+                    userId: order["thinker_id"],
                     number: order["id"],
                     category: order["domain_name"],
                     price: order["proposed_price"],

@@ -14,9 +14,9 @@ const debug = true;
 
 
 class PreviewFile extends StatefulWidget {
-  final String downloadUrl;
+  final String downloadUrl, title;
 
-  PreviewFile(this.downloadUrl);
+  PreviewFile(this.downloadUrl, this.title);
 
   @override
   _PreviewFileState createState() => _PreviewFileState();
@@ -90,7 +90,7 @@ class _PreviewFileState extends State<PreviewFile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("دراسة الجدوى"),
+        title: Text(widget.title),
         centerTitle: true,
       ),
       body: Builder(
@@ -211,7 +211,7 @@ class _PreviewFileState extends State<PreviewFile> {
         openFileFromNotification: true
     );
     await showDialog(context: context, child: AlertDialog(
-      title: Center(child: Text("تم تحميل دراسة الجدوى بنجاح !")),
+      title: Center(child: Text("تم تحميل الملف بنجاح !")),
       actions: [
         RaisedButton(
           child: Text("حسناً", textAlign: TextAlign.center,),
