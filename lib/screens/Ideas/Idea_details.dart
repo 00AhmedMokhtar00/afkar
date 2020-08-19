@@ -197,7 +197,7 @@ class _IdeaDetailsState extends State<IdeaDetails> {
                             borderSide: BorderSide(color: Theme.of(context).primaryColor)),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 10.0)
                     ),
-                    validator: (value) => double.parse(value) > 0? null : "الرجاء إدخال قيمة صحيحه",
+                    validator: (value) => value.isNotEmpty && double.parse(value) > 0? null : "الرجاء إدخال قيمة صحيحه",
                   ),
                 )
               ],
@@ -363,6 +363,7 @@ class _IdeaDetailsState extends State<IdeaDetails> {
         final String url = "https://afkarestithmar.com/api/api.php?type=accept_req&req_id=${orderModel
             .number}&price=${_investAmountController.text
             .trim()}&invest_id=${appState.id}";
+
         try {
           print(url);
           http.Response response = await http.get(url);
