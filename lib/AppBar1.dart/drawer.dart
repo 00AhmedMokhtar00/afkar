@@ -35,7 +35,7 @@ Widget drawer(BuildContext context) {
                 borderRadius: BorderRadius.circular(100),
                 child: CachedNetworkImage(
                   fit: BoxFit.fill,
-                  imageUrl: "${appState.getimage}",
+                  imageUrl: "https://afkarestithmar.com/${appState.image}",
                   placeholder: (context, url) => Container(
                     padding: EdgeInsets.all(30),
                     child: CircularProgressIndicator(),
@@ -81,13 +81,9 @@ Widget drawer(BuildContext context) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => UpdateProfile(
-                            appState.getid,
-                            appState.getimage,
-                            appState.getname,
-                            appState.getphone,
-                            appState.getabout,
-                            appState.getemail)));
+                        builder: (context) => UpdateProfile()
+                    )
+                );
               },
               child: customListElement(
                   context, "حسابي", "images/setting.png", icon: Icon(Icons.account_circle, color: Colors.grey,))),

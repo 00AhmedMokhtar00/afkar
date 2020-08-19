@@ -1,6 +1,7 @@
 
 import 'package:afkar/main.dart';
 import 'package:afkar/profile/profile.dart';
+import 'package:afkar/screens/Ideas/Ideas.dart';
 import 'package:afkar/screens/addMofaker.dart';
 import 'package:afkar/screens/ideasInestor.dart';
 import 'package:afkar/screens/ideasThatAccepted.dart';
@@ -24,7 +25,7 @@ Widget bottomNvBar(BuildContext context , {int index}){
             GestureDetector(
               onTap: (){
                 if(index != 1) {
-                appState.gettyper != "think"? Navigator.push(context, MaterialPageRoute(builder: (context)=>IdeasInvestors())):Navigator.push(context, MaterialPageRoute(builder: (context)=>AddMofaker()));
+                appState.gettyper != "think"? Navigator.push(context, MaterialPageRoute(builder: (context)=>Ideas())):Navigator.push(context, MaterialPageRoute(builder: (context)=>AddMofaker()));
                }
               },
               child: Container(

@@ -110,13 +110,10 @@ class _UploadImageProfileState extends State<UploadImageProfile> {
       .post(url, data: formData, options: dio.Options(headers: headers));
 //  print('Status:${response.statusCode}');
     var data = jsonDecode(response.data);
-    print(data[""]);
     if("${data["success"]}"== "1"){
-      print("success");
-      print(data);
       updateProfileImage(context, "${data["fileName"]}");
-      Navigator.pop(context);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>UpdateProfile(appState.getid, "https://afkarestithmar.com/userfiles/${data["fileName"]}" , appState.getname, appState.getphone, appState.getabout, appState.getemail)));
+      //Navigator.pop(context, data["fileName"]);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>UpdateProfile(uploadedImage: "https://afkarestithmar.com/userfiles/${data["fileName"]}", uploaded: true,)));
     }
 
 //  print('Response:${response.data.toString()}');

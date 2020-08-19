@@ -1,4 +1,8 @@
 import 'dart:convert';
+
+import 'package:provider/provider.dart';
+
+import 'package:afkar/models/user_model.dart';
 import 'package:afkar/screens/makalah.dart';
 import 'package:http/http.dart' as http;
 import 'package:afkar/AppBar1.dart/appBar1.dart';
@@ -6,6 +10,8 @@ import 'package:afkar/AppBar1.dart/bottomNavBar.dart';
 import 'package:afkar/AppBar1.dart/drawer.dart';
 import 'package:afkar/backEnd/getDataId.dart';
 import 'package:flutter/material.dart';
+
+import '../main.dart';
 
 class Articles extends StatefulWidget{
   @override
@@ -27,6 +33,7 @@ class _ArticlesState extends State<Articles> {
   List <String> details = [];
   @override
   Widget build(BuildContext context) {
+    _getUserInformation();
     return Scaffold(
       endDrawer: drawer(context),
       backgroundColor: Color(0xfff4f4f4),
@@ -141,4 +148,11 @@ class _ArticlesState extends State<Articles> {
       print(e);
     }
 }
+
+
+  Future<UserModel> _getUserInformation(){
+    AppState myState = Provider.of<AppState>(context,listen: false);
+
+    final url = "https://afkarestithmar.com/api/api.php?type=loginID&id=";
+  }
 }

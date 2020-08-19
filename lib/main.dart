@@ -23,9 +23,16 @@ class AppState with ChangeNotifier {
   //logIn.......................States
   String id;
   String chatId;
-  String typer;
+  String type;
+  String name, email, phone, image, about, address, price, token;
+
   void setid(String vid) {
     id = vid;
+    notifyListeners();
+  }
+
+  void setImage(String img) {
+    image = img;
     notifyListeners();
   }
 
@@ -35,15 +42,14 @@ class AppState with ChangeNotifier {
   }
 
   void settyper(String vtyper) {
-    typer = vtyper;
+    type = vtyper;
     notifyListeners();
   }
 
   get getid => id;
   get getchatId => chatId;
-  get gettyper => typer;
-  //data............of...............user
-  String name, email, phone, image, about, address, price;
+  get gettyper => type;
+
   dynamic hh;
   List<String> cat = [];
   void setData(
@@ -54,6 +60,8 @@ class AppState with ChangeNotifier {
       String abou,
       String addr,
       String prce,
+      String ty,
+
       List<String> vall,
       dynamic hj}) {
     name = nam;
@@ -64,6 +72,7 @@ class AppState with ChangeNotifier {
     address = addr;
     price = prce;
     cat = vall;
+    type = ty;
     hh = hj;
     notifyListeners();
   }
@@ -151,10 +160,6 @@ class _MyAppState extends State<MyApp> {
       appState.setid(id);
       appState.setchatId(chatId);
       appState.settyper(typer);
-
-      print("get saved id : ${appState.id}");
-      print("get saved chat : ${appState.chatId}");
-      print("get saved typer : ${appState.typer}");
     }
     return id == null;
   }

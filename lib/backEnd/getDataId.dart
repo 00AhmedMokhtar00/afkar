@@ -15,7 +15,6 @@ AppState myState = Provider.of<AppState>(context,listen: false);
         //print(request.body);
         var data = jsonDecode(request.body);
         if("${data['success']}"== "1"){
-          print(data);
             AppState myState =Provider.of<AppState>(context,listen: false);
             String l = data["cat_id"];
             List<String> vll = [];
@@ -23,18 +22,17 @@ AppState myState = Provider.of<AppState>(context,listen: false);
             dynamic lol;
              
             myState.setData(
-             img: (data["img"] == "" || data["img"] == null )? "":"${data["img"]}",
+             img: (data["img"] == "" || data["img"] == null )? "":data["img"],
              nam : "${data["Name"]}",
              ph:data["Mobile"],
              abou:data["About"],
              em:data["Email"],
              addr: data["address"],
              prce: data["price"],
+             ty: data["type"],
              hj:lol,
              vall: vll ,
              );
-             print("lol : $lol");
-             print("${myState.getname}");
              for (var i = 1; i < l.length-1; i++) {
                newl= "$newl${l[i]}";
              }
