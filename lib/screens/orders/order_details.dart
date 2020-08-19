@@ -74,7 +74,7 @@ class _OrderDetailsState extends State<OrderDetails> {
         width: MediaQuery.of(context).size.width * 0.21,
         height: MediaQuery.of(context).size.width * 0.22,
         decoration: BoxDecoration(
-            color: orderModel.investUsers != null ? Colors.green : Colors.red,
+            color: orderModel.investUsers != null && orderModel.investUsers.length != 0? Colors.green : Colors.red,
             borderRadius: BorderRadius.circular(2.0)),
         child: Center(
             child: Text(
@@ -225,15 +225,15 @@ class _OrderDetailsState extends State<OrderDetails> {
   Widget _offersView(){
     return Container(
       margin: const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 10.0),
-      height: orderModel.investUsers != null? (MediaQuery.of(context).size.height * 0.213) * orderModel.investUsers.length: null,
+      height: orderModel.investUsers != null && orderModel.investUsers.length != 0? (MediaQuery.of(context).size.height * 0.213) * orderModel.investUsers.length: null,
       child: Column(
         children: [
           _mainTitle("العروض"),
-          orderModel.investUsers != null?
+          orderModel.investUsers != null && orderModel.investUsers.length != 0?
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: orderModel.investUsers.map((offer) =>
-                _widgetOffers(offeredMoney: offer[1], investorId: offer[0])
+                _widgetOffers(offeredMoney: offer["part"], investorId: offer["id"], investorName: offer["name"])
             ).toList()
           ):Center(child: Text("لا يوجد عروض"))
         ],
@@ -249,10 +249,10 @@ class _OrderDetailsState extends State<OrderDetails> {
           children: [
             _mainTitle("المرفقات"),
 
-              ...orderModel.attachments.map((attachment) =>
-                _attachmentItem(title: attachment.toString().replaceAll("userfiles", ""), filePath: attachment.toString())
-              ).toList()
-
+            orderModel.attachments != null?
+            Column(children: _getAttachments())
+                :
+            Center(child: Text("لا يوجد مرفقات"))
           ],
         ),
       ),
@@ -274,11 +274,19 @@ class _OrderDetailsState extends State<OrderDetails> {
               'https://invideas.com/$filePath',
               //height: MediaQuery.of(context).size.height * 0.25,
               width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.7,
 
             )
 
           ],
         )
     );
+  }
+
+  List<Widget> _getAttachments(){
+
+    return orderModel.attachments.map((attachment) =>
+    _attachmentItem(title: attachment.toString().replaceAll("userfiles", ""), filePath: attachment.toString())
+    ).toList();
   }
 }

@@ -95,7 +95,7 @@ class _OrdersState extends State<Orders> {
         width: MediaQuery.of(context).size.width * 0.21,
         height: MediaQuery.of(context).size.width * 0.22,
         decoration: BoxDecoration(
-            color: orderModel.investUsers != null ? Colors.green : Colors.red,
+            color: orderModel.investUsers != null && orderModel.investUsers.length != 0? Colors.green : Colors.red,
             borderRadius: BorderRadius.circular(2.0)),
         child: Center(
             child: Text(
