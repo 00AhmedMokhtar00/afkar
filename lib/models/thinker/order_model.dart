@@ -39,4 +39,9 @@ class OrderModel{
     this.payed
   });
 
+  @override
+  String toString() {
+    return "id: $userId\nname: $userName\n";
+  }
+
 }

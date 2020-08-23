@@ -82,7 +82,7 @@ class _IdeaDetailsState extends State<IdeaDetails> {
                 width: 3,
               ),
               Text(
-                "اسم المفكر: " + orderModel.userName,
+                "اسم المفكر: " + (orderModel.userName == null?"":orderModel.userName),
                 style: TextStyle(color: Colors.black54, fontSize: 14),
               ),
             ],

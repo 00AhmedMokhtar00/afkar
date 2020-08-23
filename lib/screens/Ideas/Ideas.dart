@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:afkar/alerts/alerts.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -190,6 +191,11 @@ class _IdeasState extends State<Ideas> {
 ///////////////////////////////////////////////////////////
 
   _onOrderPressed(OrderModel orderModel){
+    print(orderModel);
+    if(orderModel == null){
+      alertTost("NO DATA");
+      return;
+    }
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => IdeaDetails(orderModel: orderModel))
     );
