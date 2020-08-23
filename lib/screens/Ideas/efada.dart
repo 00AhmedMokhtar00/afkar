@@ -184,6 +184,7 @@ class _EfadaState extends State<Efada> {
     }
     await alertTost("تم إرسال الإفادة بنجاح!");
     Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   @override
