@@ -209,7 +209,7 @@ class _IdeasState extends State<Ideas> {
     try{
 
       final String oredersUrl = "https://afkarestithmar.com/api/api.php?type=afkar&user_id=${appState.getid}";
-      print(oredersUrl);
+
       http.Response response = await http.get(oredersUrl);
 
       var data = jsonDecode(response.body);
@@ -247,6 +247,7 @@ class _IdeasState extends State<Ideas> {
       }
     }catch(e){
       print(e);
+      return null;
     }
   }
 
