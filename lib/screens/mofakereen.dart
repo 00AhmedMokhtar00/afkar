@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:provider/provider.dart';
 import 'package:afkar/models/thinker/thiker_model.dart';
+import 'package:afkar/profile/profile.dart';
 import 'package:http/http.dart' as http;
 import 'package:afkar/AppBar1.dart/appBar2.dart';
 import 'package:afkar/profile/viewPhoto.dart';
@@ -7,6 +9,8 @@ import 'package:material_dropdown_formfield/material_dropdown_formfield.dart';
 import 'package:afkar/AppBar1.dart/bottomNavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
+import '../main.dart';
 
 class Mofakereen extends StatefulWidget {
   @override
@@ -59,10 +63,9 @@ class _MofakereenState extends State<Mofakereen> {
   }
 
   Widget _thinkerCard(ThinkerModel thinkerModel) {
+    AppState appState = Provider.of<AppState>(context,listen: false);
     return GestureDetector(
-      onTap: () {
-
-      },
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => Profile(appState.id, thinkerModel.id))),
       child: Container(
         padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
         alignment: Alignment.center,
