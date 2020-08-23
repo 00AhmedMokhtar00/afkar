@@ -71,11 +71,6 @@ Widget drawer(BuildContext context) {
 
       Column(
         children: <Widget>[
-          //Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile(userId , userId , double.parse(myState.getlat) , double.parse(myState.getlong))));
-          // GestureDetector(
-          //   onTap: (){
-          //   },
-          // child: customListElement(context,"مساعدة", "images/help.png")),
           GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -86,7 +81,7 @@ Widget drawer(BuildContext context) {
                 );
               },
               child: customListElement(
-                  context, "حسابي", "images/setting.png", icon: Icon(Icons.account_circle, color: Colors.grey,))),
+                  context, "حسابي", "images/setting.png", icon: Icon(Icons.account_circle, color: Colors.grey, size: 35.0,))),
           if (appState.gettyper == "think") ...[
             GestureDetector(
                 onTap: () {
@@ -160,14 +155,14 @@ Widget customListElement(BuildContext context, String name, String image, {Icon 
               padding: const EdgeInsets.only(left: 8.0),
               child: icon != null?icon:Image(
                 image: AssetImage(image),
-                width: 28,
-                height: 28,
+                width: 35,
+                height: 35,
               )),
           Text(
             name,
             style: TextStyle(
                 color: Colors.black54,
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: FontWeight.w500),
           ),
         ]),
