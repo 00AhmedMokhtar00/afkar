@@ -22,29 +22,52 @@ class _MofakereenState extends State<Mofakereen> {
         backgroundColor: Color(0xfff5f5f5),
         appBar: appBar2(context, "المفكرين", "images/Investor.png"),
         bottomNavigationBar: bottomNvBar(context, index: 3),
-        body: Container(
-          margin: EdgeInsets.only(top: 5),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height - 5,
-          child: ListView.builder(
-            itemCount: names.length,
-            itemBuilder: (context, i) {
-              return mofakerCard(context, images[i], names[i], abouts[i]);
-            },
-          ),
-        )
+        body: _initialView()
         );
   }
 
-  Widget mofakerCard(
-      BuildContext context, String imgurl, String name, String about) {
+
+  Widget _initialView(){
+    return FutureBuilder<List<ThinkerModel>>(
+        future: _getThinkersList(),
+      builder: (context, snapshot) {
+          if(snapshot.hasData) {
+            return Container(
+              margin: EdgeInsets.only(top: 5),
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height - 5,
+              child: ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, i) {
+                  return _thinkerCard(snapshot.data[i]);
+                },
+              ),
+            );
+          }else if(snapshot.hasError){
+            return Text(snapshot.error);
+          } else{
+            return Center(child: CircularProgressIndicator());
+          }
+      }
+    );
+  }
+
+  Widget _thinkerCard(ThinkerModel thinkerModel) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+
+      },
       child: Container(
         padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width,
-        height: 90,
+        //height: 90,
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
             color: Color(0xfff4f4f4),
@@ -52,64 +75,61 @@ class _MofakereenState extends State<Mofakereen> {
           )
         ], color: Colors.white),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Container(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PhotoView(imgurl ==
-                                            null ||
-                                        imgurl == ""
-                                    ? "http://matib.jaderplus.com/userfiles/5e6e6b8791988_profile.png"
-                                    : imgurl)));
-                      },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(200),
-                        child: Container(
-                          width: 65,
-                          height: 65,
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: "$imgurl",
-                            placeholder: (context, url) => Container(
-                              padding: EdgeInsets.all(30),
-                              child: CircularProgressIndicator(),
-                            ),
-                            errorWidget: (context, url, error) =>
-                                Image(image: AssetImage("images/profile2.png")),
-                          ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Container(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PhotoView(thinkerModel.img ==
+                                        null ||
+                                thinkerModel.img == ""
+                                ? "http://matib.jaderplus.com/userfiles/5e6e6b8791988_profile.png"
+                                : "https://afkarestithmar.com/" + thinkerModel.img)
+                        )
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(200),
+                    child: Container(
+                      width: 65,
+                      height: 65,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: "https://afkarestithmar.com/" + thinkerModel.img,
+                        placeholder: (context, url) => Container(
+                          padding: EdgeInsets.all(30),
+                          child: CircularProgressIndicator(),
                         ),
+                        errorWidget: (context, url, error) =>
+                            Image(image: AssetImage("images/profile2.png")),
+
                       ),
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "$name",
-                      style: TextStyle(color: Colors.black54, fontSize: 14),
-                    ),
-                    Text(
-                      about.length > 40
-                          ? about.substring(0, 39) + " ..."
-                          : about,
-                      style: TextStyle(color: Colors.black54, fontSize: 12),
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
-            Container()
+            SizedBox(width: 10),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    thinkerModel.name,
+                    style: TextStyle(color: Colors.black54, fontSize: 14),
+                  ),
+                  Text(
+                    thinkerModel.about.length > 30?thinkerModel.about.substring(0,30) + " ...":thinkerModel.about,
+                    style: TextStyle(color: Colors.black54, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

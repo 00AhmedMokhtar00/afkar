@@ -19,13 +19,6 @@ class Ideas extends StatefulWidget {
 }
 
 class _IdeasState extends State<Ideas> {
-  List<OrderModel> orderModel = List();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +49,8 @@ class _IdeasState extends State<Ideas> {
                 },
               ),
             );
-          } else if(snapshot.hasError){
+          }
+          else if(snapshot.hasError){
             return Text(snapshot.error);
           } else{
             return Center(child: CircularProgressIndicator());
