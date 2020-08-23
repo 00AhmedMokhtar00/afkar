@@ -5,6 +5,7 @@ import 'package:afkar/main.dart';
 import 'package:afkar/models/thinker/order_model.dart';
 import 'package:afkar/screens/ideasDetails.dart';
 import 'package:afkar/screens/ideasThatAcceptedDetails.dart';
+import 'package:afkar/utils/helper_methods.dart';
 import 'package:http/http.dart' as http;
 import 'package:afkar/AppBar1.dart/appBar2.dart';
 import 'package:afkar/AppBar1.dart/bottomNavBar.dart';
@@ -154,7 +155,7 @@ class _IdeasThatAcceptedState extends State<IdeasThatAccepted> {
           Image.asset("images/note.png", width: 30.0, height: 30.0, fit: BoxFit.fill,),
           SizedBox(width: 3.0,),
           Text(
-              "انت مساهم بمبلغ " + (double.parse(orderModel.price) * double.parse(orderModel.investPercentage) / 100).toStringAsFixed(2) + " ر.س في هذا المشروع",
+              "انت مساهم بمبلغ " + HelperMethods.formatMoney(double.parse(orderModel.price) * double.parse(orderModel.investPercentage) / 100) + " ر.س في هذا المشروع",
             style: TextStyle(color: Colors.black54, fontSize: 8),
           )
         ],
@@ -196,9 +197,9 @@ class _IdeasThatAcceptedState extends State<IdeasThatAccepted> {
       alertTost("NO DATA");
       return;
     }
-//    Navigator.push(
-//        context, MaterialPageRoute(builder: (context) => IdeasThatAcceptedDetails())
-//    );
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => IdeasThatAcceptedDetails(orderModel))
+    );
   }
 
   Future<List<OrderModel>> _getMyAcceptedOrders()async{
@@ -244,42 +245,5 @@ class _IdeasThatAcceptedState extends State<IdeasThatAccepted> {
       return null;
     }
 }
-
-
-
-
-
-
-  Widget ideasThatAcceptedCard(BuildContext context ,String title , String name ,String id , String details , String domain , String pre ,String proposel){
-    return GestureDetector(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>IdeasThatAcceptedDetails(id , name , details , domain , pre , proposel)));
-        },
-          child: Container(
-        padding: EdgeInsets.all(20),
-        alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: 90,
-        decoration: BoxDecoration(
-          boxShadow:[
-            BoxShadow(
-            color: Color(0xfff4f4f4),
-            spreadRadius: 2,
-            )
-          ],
-          color: Colors.white
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width*0.76,
-              child: Text("$title" , style: TextStyle(color:Colors.black54, fontSize: 15),)),
-            Text("#$id" , style: TextStyle(color:Colors.black54, fontSize: 15),),
-          ],
-        ),
-      ),
-    );
-  }
   
 }

@@ -40,6 +40,7 @@ dev_dependencies:
   grouped_buttons: ^1.0.4
   material_dropdown_formfield: ^0.1.4
   fluttertoast: ^4.0.1
+  intl: ^0.16.1
 
   permission_handler: ^5.0.1+1
   file_picker: ^1.13.3
