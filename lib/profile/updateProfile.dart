@@ -102,7 +102,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
               borderRadius: BorderRadius.circular(100),
               child: CachedNetworkImage(
                 fit: BoxFit.fill,
-                imageUrl: widget.uploadedImage == null?"":"https://afkarestithmar.com/${widget.uploadedImage}",
+                imageUrl: widget.uploadedImage == null? "https://afkarestithmar.com/" + appState.image:"https://afkarestithmar.com/${widget.uploadedImage}",
                 placeholder: (context, url) => Container(
                   padding: EdgeInsets.all(30),
                   child: CircularProgressIndicator(),
