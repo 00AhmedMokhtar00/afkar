@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:afkar/utils/helper_methods.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -143,7 +144,7 @@ class _OrdersState extends State<Orders> {
                   Icon(Icons.category, color: Colors.black38, size: 12),
                 ),
                 subTitleWidget(
-                  orderModel.price,
+                  HelperMethods.formatMoney(double.parse(orderModel.price)),
                   Icon(Icons.monetization_on,
                       color: Colors.black38, size: 12),
                 ),

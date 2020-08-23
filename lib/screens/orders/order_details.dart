@@ -2,6 +2,7 @@
 import 'package:afkar/AppBar1.dart/appBar2.dart';
 import 'package:afkar/models/thinker/order_model.dart';
 import 'package:afkar/profile/chat.dart';
+import 'package:afkar/utils/helper_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf_flutter/pdf_flutter.dart';
 
@@ -162,7 +163,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 size: MediaQuery.of(context).size.height * 0.07,
               ),
               Text(
-                orderModel.price,
+                HelperMethods.formatMoney(double.parse(orderModel.price)),
                 style: TextStyle(fontSize: 25),
               ),
               Text("السعر المطلوب")
