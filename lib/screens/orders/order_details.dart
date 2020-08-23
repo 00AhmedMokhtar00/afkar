@@ -16,6 +16,7 @@ class OrderDetails extends StatefulWidget {
 }
 
 class _OrderDetailsState extends State<OrderDetails> {
+
   OrderModel get orderModel {
     return widget.orderModel;
   }
@@ -62,14 +63,14 @@ class _OrderDetailsState extends State<OrderDetails> {
       ], color: Colors.white),
       child: Row(
         children: <Widget>[
-          _orderNumberView(orderModel),
-          _orderItemView(orderModel),
+          _orderNumberView(),
+          _orderItemView(),
         ],
       ),
     );
   }
 
-  _orderNumberView(OrderModel orderModel){
+  _orderNumberView(){
     return Container(
         margin: const EdgeInsets.only(left: 12.0),
         width: MediaQuery.of(context).size.width * 0.21,
@@ -84,7 +85,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             )));
   }
 
-  _orderItemView(OrderModel orderModel){
+  _orderItemView(){
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -211,7 +212,7 @@ class _OrderDetailsState extends State<OrderDetails> {
         subtitle: Text(offeredMoney),
         trailing: GestureDetector(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Chat(orderModel.userId,investorId,investorId,"INVO")));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Chat(orderModel.userId,investorId,investorId,investorName)));
           },
           child: Icon(
             Icons.email,

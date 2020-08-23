@@ -67,11 +67,7 @@ Widget appBar(BuildContext context ,  final GlobalKey<ScaffoldState> _scaffoldKe
                     ),
                     IconButton(
                         alignment: Alignment.centerLeft,
-                        icon: Image(
-                          image: AssetImage("images/menu.png"),
-                          width: 35,
-                          height: 35,
-                        ),
+                        icon: Icon(Icons.menu, color: Colors.white),
                         onPressed: () {
                           _scaffoldKey.currentState.openEndDrawer();
                         }),
