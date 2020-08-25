@@ -504,9 +504,9 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
                     Text("${widget.about}",
                         style: TextStyle(fontSize: 18, color: Colors.black)),
 
-                    Text("${widget._file1.path}",
+                    Text(widget._file1 == null? "" : widget._file1.path,
                         style: TextStyle(fontSize: 18, color: Colors.black)),
-                    Text("${widget._file2.path}",
+                    Text(widget._file2 == null? "" : widget._file2.path,
                         style: TextStyle(fontSize: 18, color: Colors.black)),
                   ],
                 ),

@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:afkar/alerts/alerts.dart';
+import 'package:afkar/login.dart';
 import 'package:afkar/screens/verifyAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../HomePage.dart';
 
 class Reg2 extends StatefulWidget{
   final File image;
@@ -103,16 +107,32 @@ class _Reg2State extends State<Reg2> {
     );
   }
   Future reg(BuildContext context)async{
-    try{var url = "https://afkarestithmar.com/api/api.php?type=reginvest&phone=${widget.phone.trim()}&pass=${widget.pass.trim()}&name=${widget.name.trim()}&email=${widget.email.trim()}&address=adress&about=${conAbout.text.trim()}&price=1&domain_id=1";
+    try{
+      String url = "https://afkarestithmar.com/api/api.php?type=reginvest&phone=${widget.phone.trim()}&pass=${widget.pass.trim()}&name=${widget.name.trim()}&email=${widget.email.trim()}&address=adress&about=${conAbout.text.trim()}&price=1&domain_id=1";
         var request = await http.get(url);
-        print(request.body);
         var data = jsonDecode(request.body);
-        if("${data['success']}"== "1"){
-          print(data);
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyAccount()));
-        } 
+        print(request.body);
+
+        if(data['success'] == "1"){
+          print("TOTO: " + data['token']);
+          String verifyUrl = "https://afkarestithmar.com/api/api.php?type=payedactiviateacc&token=${data['token']}";
+          http.Response verifyResponse = await http.get(verifyUrl);
+          var decodedBody = jsonDecode(verifyResponse.body);
+          print(verifyResponse.body);
+          await alertTost(data['message']);
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>LogIn()));
+        } else{
+          await alertTost(data['message']);
+          Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
+          setState(() {
+            isLoading = false;
+            message = "${data['message']}";
+          });
+        }
     }catch(e){
-      print(e);
+      print("CATCH ERROR: " + e.toString());
+      await alertTost(e.toString());
+      Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
       setState(() {
         isLoading = false;
         message = "$e";

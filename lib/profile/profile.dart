@@ -171,10 +171,10 @@ class _ProfileState extends State<Profile> {
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500),
                                         ),
-                                        SizedBox(height: 5.0),
-                                        Text(snapshot.data.mobile == null ? "":snapshot.data.mobile,style: TextStyle(color: Colors.black54, fontSize: 16 , fontWeight: FontWeight.w500),),
-                                        SizedBox(height: 5.0),
-                                        Text(snapshot.data.email == null ? "":snapshot.data.email,style: TextStyle(color: Colors.black54, fontSize: 16 , fontWeight: FontWeight.w500),),
+//                                        SizedBox(height: 5.0),
+//                                        Text(snapshot.data.mobile == null ? "":snapshot.data.mobile,style: TextStyle(color: Colors.black54, fontSize: 16 , fontWeight: FontWeight.w500),),
+//                                        SizedBox(height: 5.0),
+//                                        Text(snapshot.data.email == null ? "":snapshot.data.email,style: TextStyle(color: Colors.black54, fontSize: 16 , fontWeight: FontWeight.w500),),
                                         SizedBox(height: 20.0),
                                         Padding(
                                           padding: const EdgeInsets.only(
@@ -189,29 +189,29 @@ class _ProfileState extends State<Profile> {
                                                     .w500),
                                           ),
                                         ),
-                                          myId == userId ?Container():GestureDetector(
-                                            onTap: (){
-                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Chat(myId , userId , snapshot.data.chatFriendID , snapshot.data.name)));
-                                            },
-                                                               child: Container(
-                                              margin: EdgeInsets.only(top:10),
-                                              alignment: Alignment.center,
-                                              width: 80,
-                                                 height: 35,
-
-                                                 decoration: BoxDecoration(
-                                                   borderRadius: BorderRadius.circular(20),
-                                                   color: Color(0xfff0f0f0)
-                                                   ),
-                                                   child: Row(
-                                                     mainAxisAlignment: MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                  Image(image: AssetImage("images/message.png"), width: 18,height: 18,),
-                                                  Text("مراسلة",style: TextStyle(color: Colors.black54, fontSize: 11 , fontWeight: FontWeight.w500),),
-                                              ],
-                                            ),
-                                            ),
-                                          )
+//                                          myId == userId ?Container():GestureDetector(
+//                                            onTap: (){
+//                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Chat(myId , userId , snapshot.data.chatFriendID , snapshot.data.name)));
+//                                            },
+//                                                               child: Container(
+//                                              margin: EdgeInsets.only(top:10),
+//                                              alignment: Alignment.center,
+//                                              width: 80,
+//                                                 height: 35,
+//
+//                                                 decoration: BoxDecoration(
+//                                                   borderRadius: BorderRadius.circular(20),
+//                                                   color: Color(0xfff0f0f0)
+//                                                   ),
+//                                                   child: Row(
+//                                                     mainAxisAlignment: MainAxisAlignment.center,
+//                                              children: <Widget>[
+//                                                  Image(image: AssetImage("images/message.png"), width: 18,height: 18,),
+//                                                  Text("مراسلة",style: TextStyle(color: Colors.black54, fontSize: 11 , fontWeight: FontWeight.w500),),
+//                                              ],
+//                                            ),
+//                                            ),
+//                                          )
                                       ]),
                                 ),
                               ],

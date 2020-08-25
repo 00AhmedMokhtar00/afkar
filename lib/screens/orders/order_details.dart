@@ -251,7 +251,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           children: [
             _mainTitle("المرفقات"),
 
-            orderModel.attachments != null?
+            orderModel.attachments != null || (orderModel.attachments.first != "" && orderModel.attachments.last != "")?
             Column(children: _getAttachments())
                 :
             Center(child: Text("لا يوجد مرفقات"))

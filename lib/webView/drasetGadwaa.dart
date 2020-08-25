@@ -20,7 +20,7 @@ class _DrasetGadwaaState extends State<DrasetGadwaa> {
   Completer<WebViewController> _controller = Completer<WebViewController>();
   Completer<WebViewController> _controller2 = Completer<WebViewController>();
   String url, downloadUrl;
-  bool isLoading = true;
+  bool isLoading = true, done = false;
   @override
   void initState() {
     url = "https://invideas.com/feasability2/${widget.id}";
@@ -53,7 +53,11 @@ class _DrasetGadwaaState extends State<DrasetGadwaa> {
               _controller.complete(webViewController);
             },
             navigationDelegate: (NavigationRequest request) async{
-              Navigator.push(context, MaterialPageRoute(builder: (_) => PreviewFile(request.url, "دراسة الجدوى")));
+              if(done) {
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (_) => PreviewFile(request.url, "دراسة الجدوى")));
+              }
+              done = true;
               return NavigationDecision.navigate;
             },
           ),
