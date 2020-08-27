@@ -48,6 +48,7 @@ class _OrdersState extends State<Orders> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
+              reverse: true,
               physics: BouncingScrollPhysics(),
               itemCount: snapshot.data.length,
               itemBuilder: (context, i) {
@@ -55,10 +56,13 @@ class _OrdersState extends State<Orders> {
               },
             ),
           );
-        } else if(snapshot.hasError){
+        }
+        else if(snapshot.hasError){
           return Text(snapshot.error);
-        } else{
+        } else if(snapshot.connectionState == ConnectionState.waiting){
           return Center(child: CircularProgressIndicator());
+        }else{
+          return Center(child: Text("لا يوجد طلبات"));
         }
       }
     );
@@ -191,6 +195,7 @@ class _OrdersState extends State<Orders> {
 
   Future<List<OrderModel>> _getMyOrders()async{
     AppState appState = Provider.of<AppState>(context,listen: false);
+    print("ID: " + appState.getid);
     try{
 
       final String oredersUrl = "https://afkarestithmar.com/api/api.php?type=myrequests&user_id=${appState.getid}";
@@ -228,6 +233,8 @@ class _OrdersState extends State<Orders> {
 
         return orderModels;
       }
+      print("HERE");
+      return null;
     }catch(e){
       print(e);
     }

@@ -141,7 +141,7 @@ class _LogInState extends State<LogIn> {
                               children: <Widget>[
                                 TextField(
                                   controller: _passwordController,
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.text,
                                   style: TextStyle(
                                     color: Colors.black54,
                                     fontSize: 15,
@@ -156,7 +156,7 @@ class _LogInState extends State<LogIn> {
                                     filled: true,
                                     
                                     fillColor: Color(0xffebebeb),
-                                    hintText: "ادخل الرقم السري",
+                                    hintText: "ادخل كلمة السر",
                                     hintStyle: TextStyle(
                                         color: Colors.black26, fontSize: 12),
                                   ),

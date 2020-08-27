@@ -102,7 +102,7 @@ class _MostasmerListState extends State<MostasmerList> {
                     child: Container(
                       width: 65,
                       height: 65,
-                      child: CachedNetworkImage(
+                      child: thinkerModel.img.isNotEmpty?CachedNetworkImage(
                         fit: BoxFit.cover,
                         imageUrl: "https://afkarestithmar.com/" + thinkerModel.img,
                         placeholder: (context, url) => Container(
@@ -112,7 +112,7 @@ class _MostasmerListState extends State<MostasmerList> {
                         errorWidget: (context, url, error) =>
                             Image(image: AssetImage("images/profile2.png")),
 
-                      ),
+                      ):Image(image: AssetImage("images/profile2.png")),
                     ),
                   ),
                 ),

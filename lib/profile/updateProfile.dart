@@ -100,7 +100,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              child: CachedNetworkImage(
+              child: widget.uploadedImage != null || (appState.image != null && appState.image.isNotEmpty)? CachedNetworkImage(
                 fit: BoxFit.fill,
                 imageUrl: widget.uploadedImage == null? "https://afkarestithmar.com/" + appState.image:"https://afkarestithmar.com/${widget.uploadedImage}",
                 placeholder: (context, url) => Container(
@@ -109,7 +109,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 ),
                 errorWidget: (context, url, error) =>
                     Image(image: AssetImage("images/profile2.png")),
-              ),
+              ):Image(image: AssetImage("images/profile2.png")),
             ),
           ),
           Text(

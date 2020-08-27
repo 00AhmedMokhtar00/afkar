@@ -125,7 +125,7 @@ class _ProfileState extends State<Profile> {
                                               image: snapshot.data.img == null ||
                                                   snapshot.data.img == ""
                                                   ? "https://afkarestithmar.com/userfiles/5ec6c63caf6b8_profile.png"
-                                                  : "https://afkarestithmar.com/" + snapshot.data.img,
+                                                  : snapshot.data.img.contains("https")?snapshot.data.img:"https://afkarestithmar.com/" + snapshot.data.img,
                                               placeholder: 'images/profile.png',
                                               width: 60,
                                               height: 80,

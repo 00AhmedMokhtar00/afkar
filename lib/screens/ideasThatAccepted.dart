@@ -22,7 +22,7 @@ class _IdeasThatAcceptedState extends State<IdeasThatAccepted> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff4f4f4),
-      appBar:appBar3(context , "الافكار اللتي تم قبولها"),
+      appBar:appBar3(context , "الافكار التي تم قبولها"),
       bottomNavigationBar: bottomNvBar(context , index:2) ,
       body: _initialView()
     );
@@ -52,8 +52,12 @@ class _IdeasThatAcceptedState extends State<IdeasThatAccepted> {
             );
           } else if(snapshot.hasError){
             return Text(snapshot.error);
-          } else{
+          } else if(snapshot.connectionState == ConnectionState.waiting){
             return Center(child: CircularProgressIndicator());
+          }else if(snapshot.connectionState == ConnectionState.done && snapshot.data == null){
+            return Center(child: Text("لم تقم بقبول اي افكار"));
+          }else{
+            return Center(child: Text("حدث خطأ في إستدعاء الافكار!"));
           }
         }
     );
@@ -204,7 +208,7 @@ class _IdeasThatAcceptedState extends State<IdeasThatAccepted> {
 
   Future<List<OrderModel>> _getMyAcceptedOrders()async{
     AppState appState = Provider.of<AppState>(context,listen: false);
-
+    print(appState.getid);
     try{
       var url = "https://afkarestithmar.com/api/api.php?type=afkaraccepted&user_id=${appState.getid}";
 
@@ -239,7 +243,8 @@ class _IdeasThatAcceptedState extends State<IdeasThatAccepted> {
               ).toList()
           );
           return orderModels;
-        } 
+        }
+        return null;
     }catch(e){
       print(e);
       return null;

@@ -51,9 +51,13 @@ class _IdeasState extends State<Ideas> {
             );
           }
           else if(snapshot.hasError){
-            return Text(snapshot.error);
-          } else{
-            return Center(child: CircularProgressIndicator());
+            return Center(child: Text(snapshot.error));
+          }else if(snapshot.connectionState == ConnectionState.waiting){
+          return Center(child: CircularProgressIndicator());
+          }else if(snapshot.connectionState == ConnectionState.done && snapshot.data == null){
+          return Center(child: Text("لا يوجد أفكار جديدة"));
+          }else{
+            return Center(child: Text("حدث خطأ في إستدعاء الافكار!"));
           }
         }
     );
@@ -199,7 +203,7 @@ class _IdeasState extends State<Ideas> {
   Future<List<OrderModel>> _getMyOrders()async{
 
     AppState appState = Provider.of<AppState>(context,listen: false);
-
+    print(appState.id);
     try{
 
       final String oredersUrl = "https://afkarestithmar.com/api/api.php?type=afkar&user_id=${appState.getid}";
@@ -239,6 +243,8 @@ class _IdeasState extends State<Ideas> {
 
         return orderModels;
       }
+      print("HERE");
+      return null;
     }catch(e){
       print(e);
       return null;

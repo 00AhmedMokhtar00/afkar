@@ -100,7 +100,7 @@ class _MofakereenState extends State<Mofakereen> {
                     child: Container(
                       width: 65,
                       height: 65,
-                      child: CachedNetworkImage(
+                      child: thinkerModel.img.isNotEmpty?CachedNetworkImage(
                         fit: BoxFit.cover,
                         imageUrl: "https://afkarestithmar.com/" + thinkerModel.img,
                         placeholder: (context, url) => Container(
@@ -110,7 +110,7 @@ class _MofakereenState extends State<Mofakereen> {
                         errorWidget: (context, url, error) =>
                             Image(image: AssetImage("images/profile2.png")),
 
-                      ),
+                      ):Image(image: AssetImage("images/profile2.png")),
                     ),
                   ),
                 ),

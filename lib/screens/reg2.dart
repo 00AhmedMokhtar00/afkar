@@ -114,7 +114,6 @@ class _Reg2State extends State<Reg2> {
         print(request.body);
 
         if(data['success'] == "1"){
-          print("TOTO: " + data['token']);
           String verifyUrl = "https://afkarestithmar.com/api/api.php?type=payedactiviateacc&token=${data['token']}";
           http.Response verifyResponse = await http.get(verifyUrl);
           var decodedBody = jsonDecode(verifyResponse.body);

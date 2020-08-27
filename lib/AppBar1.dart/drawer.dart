@@ -33,7 +33,7 @@ Widget drawer(BuildContext context) {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: CachedNetworkImage(
+                child: appState.image != null && appState.image.isNotEmpty?CachedNetworkImage(
                   fit: BoxFit.fill,
                   imageUrl: "https://afkarestithmar.com/${appState.image}",
                   placeholder: (context, url) => Container(
@@ -42,7 +42,7 @@ Widget drawer(BuildContext context) {
                   ),
                   errorWidget: (context, url, error) =>
                       Image(image: AssetImage("images/profile2.png")),
-                ),
+                ):Image(image: AssetImage("images/profile2.png")),
               ),
             ),
           ),
