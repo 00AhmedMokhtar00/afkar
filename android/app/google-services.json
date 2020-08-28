@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "302940369724",
-    "firebase_url": "https://thinker-investor.firebaseio.com",
-    "project_id": "thinker-investor",
-    "storage_bucket": "thinker-investor.appspot.com"
+    "project_number": "168960255426",
+    "firebase_url": "https://afkar-58349.firebaseio.com",
+    "project_id": "afkar-58349",
+    "storage_bucket": "afkar-58349.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:302940369724:android:6bfbf2d3a64074c7c1e439",
+        "mobilesdk_app_id": "1:168960255426:android:7027389258abb4b3c5225b",
         "android_client_info": {
           "package_name": "com.afkar"
         }
       },
       "oauth_client": [
         {
-          "client_id": "302940369724-jcshidu97v9s2nc4ja206dsvbsbhrlp5.apps.googleusercontent.com",
+          "client_id": "168960255426-ccrs4jsa8bkdnkcptgf0d4r6cddpddrq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.afkar",
+            "certificate_hash": "4cded08e4ee5f925a7e60122bb0c4333d99988d4"
+          }
+        },
+        {
+          "client_id": "168960255426-f25fom75a25dfg7omg0ffma1b0kvibii.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAQUla0-ZLgibVw1MoLWu8qjpMpE8i4HDE"
+          "current_key": "AIzaSyA2x2A4sjO8QC8bpXIIh4Uv2BV0UxwI85s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "302940369724-jcshidu97v9s2nc4ja206dsvbsbhrlp5.apps.googleusercontent.com",
+              "client_id": "168960255426-f25fom75a25dfg7omg0ffma1b0kvibii.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
