@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:afkar/alerts/alerts.dart';
+import 'package:afkar/firebase/push_notifications.dart';
 import 'package:afkar/login.dart';
 import 'package:afkar/screens/verifyAccount.dart';
 import 'package:flutter/material.dart';
@@ -107,6 +108,7 @@ class _Reg2State extends State<Reg2> {
     );
   }
   Future reg(BuildContext context)async{
+    PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
     try{
       String url = "https://afkarestithmar.com/api/api.php?type=reginvest&phone=${widget.phone.trim()}&pass=${widget.pass.trim()}&name=${widget.name.trim()}&email=${widget.email.trim()}&address=adress&about=${conAbout.text.trim()}&price=1&domain_id=1";
         var request = await http.get(url);
@@ -119,6 +121,7 @@ class _Reg2State extends State<Reg2> {
           var decodedBody = jsonDecode(verifyResponse.body);
           print(verifyResponse.body);
           await alertTost(data['message']);
+          pushNotificationsManager.investorSubscription();
           Navigator.push(context, MaterialPageRoute(builder: (context)=>LogIn()));
         } else{
           await alertTost(data['message']);

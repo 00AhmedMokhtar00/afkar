@@ -11,6 +11,8 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterDownloader.initialize();
+
+
   runApp(
       ChangeNotifierProvider<AppState>(
           create: (_) => AppState(), child: MyApp()
@@ -78,6 +80,10 @@ class AppState with ChangeNotifier {
   }
 
   void signOut() {
+    PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
+    pushNotificationsManager.unSubscripe(type == "think"?"thinkers":"investors");
+    print(type);
+    type = "";
     name = "";
     email = "";
     phone = "";
@@ -106,15 +112,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void initState() {
-    PushNotificationsManager pushNotificationsManager =
-        new PushNotificationsManager();
-    pushNotificationsManager.init();
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:afkar/backEnd/uploadAnyPhoto.dart';
+import 'package:afkar/firebase/push_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -552,6 +553,7 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
   }
   // TODO
   Future getTalabaty(BuildContext context , String ur, String ur2)async{
+    PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
     AppState appState = Provider.of<AppState>(context,listen: false);
     try{
       var url = "https://afkarestithmar.com/api/api.php?type=addrequest&domain_id=${widget.data}&proposed_price=${widget.price}&status=${widget.state}&details=${widget.about}&title=${widget.title}&user_id=${appState.getid}&promocode=${widget.code}&attachs=\'$ur\',\'$ur2\'&invest_per=${widget.per}";
@@ -560,10 +562,12 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
         var data = jsonDecode(request.body);
         if("${data['success']}"== "1"){
           print(data);
-          Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pop(context);
           alertTost("${data["message"]}");
+          pushNotificationsManager.sendNotificationToInvestors();
+          Navigator.pop(context);
+          Navigator.pop(context);
+          Navigator.pop(context);
+
         } 
     }catch(e){
       print(e);

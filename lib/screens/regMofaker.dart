@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:afkar/alerts/alerts.dart';
+import 'package:afkar/firebase/push_notifications.dart';
 import 'package:afkar/login.dart';
 import 'package:afkar/screens/verifyAccount.dart';
 import 'package:http/http.dart' as http;
@@ -231,12 +232,14 @@ class _RegMofakerState extends State<RegMofaker> {
   }
 
   Future verifay(String phone)async{
+    PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
     try{var url = "https://afkarestithmar.com/api/api.php?type=confirmreg&phone=$phone";
     var request = await http.get(url);
     var data = jsonDecode(request.body);
     if("${data['success']}"== "1"){
       print(data);
       alertTost("${data['message']}");
+      await pushNotificationsManager.thinkerSubscription();
       Navigator.push(context, MaterialPageRoute(builder: (context)=>LogIn()));
     }
     }catch(e){

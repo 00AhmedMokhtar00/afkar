@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:afkar/firebase/push_notifications.dart';
 import 'package:provider/provider.dart';
 
 import 'package:afkar/models/user_model.dart';
@@ -20,8 +21,15 @@ class Articles extends StatefulWidget{
 
 class _ArticlesState extends State<Articles> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool t = false;
   @override
   void initState() {
+
+    if(!t){
+      PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
+      pushNotificationsManager.init(context).then((value) => pushNotificationsManager.sendNotificationToInvestors());
+      t = true;
+    }
     getDataId(context).then((v){
       setState((){});
     });
@@ -33,6 +41,7 @@ class _ArticlesState extends State<Articles> {
   List <String> details = [];
   @override
   Widget build(BuildContext context) {
+
     _getUserInformation();
     return Scaffold(
       endDrawer: drawer(context),

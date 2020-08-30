@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'package:afkar/firebase/push_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:afkar/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -220,11 +223,21 @@ class _ChatState extends State<Chat> {
   }
 
   sendmessage(String message)async{
+    AppState appState = Provider.of<AppState>(context,listen: false);
     try{var url = "https://afkarestithmar.com/chat2/servicesapis.php?ApiType=sendChat&userID=$mychatId&username=$myId&to_username=$userId&toUserID=$userchatId&message=$message&mtype=2";
         var request = await http.get(url);
         //print(request.body);
         var data = jsonDecode(request.body);
         if(data[0]=="success"){
+          var notificationUrl = "https://afkarestithmar.com/api/api.php?type=loginID&id=$userId";
+          var request = await http.get(notificationUrl);
+          var data = jsonDecode(request.body);
+          if(data["success"] == 1){
+            print("TO: " + data["firebaseAcess"]);
+            PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
+            //await pushNotificationsManager.sendNotificationToInvestors();
+            await pushNotificationsManager.sendNotification(data["firebaseAcess"], title: appState.name, body: message);
+          }
           getonChatData(myId , userId);
         }
         else{

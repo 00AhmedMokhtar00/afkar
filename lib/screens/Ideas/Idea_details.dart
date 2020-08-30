@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:afkar/alerts/alerts.dart';
+import 'package:afkar/firebase/push_notifications.dart';
 import 'package:afkar/screens/Ideas/efada.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -370,6 +371,13 @@ class _IdeaDetailsState extends State<IdeaDetails> {
           var data = jsonDecode(response.body);
           if( data['success']== 1){
             await alertTost("تم قبول الفكرة بنجاح!");
+            var notificationUrl = "https://afkarestithmar.com/api/api.php?type=loginID&id=${orderModel.userId}";
+            var request = await http.get(notificationUrl);
+            var data = jsonDecode(request.body);
+            if(data["success"] == 1){
+              PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
+              await pushNotificationsManager.sendNotification(data["firebaseAcess"], title: appState.name, body: "تم قبول فكرتك من قبل: ${appState.name}");
+            }
             Navigator.pop(context);
           }
 

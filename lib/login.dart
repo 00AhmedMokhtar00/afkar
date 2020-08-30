@@ -9,6 +9,8 @@ import 'package:http/http.dart' as http;
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'firebase/push_notifications.dart';
+
 class LogIn extends StatefulWidget {
   @override
   _LogInState createState() => _LogInState();
@@ -231,6 +233,7 @@ class _LogInState extends State<LogIn> {
   }
 
   loginData(String email, String password) async {
+    PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
     final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
     String firetoken = await _firebaseMessaging.getToken();
     print("FirebaseMessaging token: $firetoken");
@@ -240,11 +243,13 @@ class _LogInState extends State<LogIn> {
       var request = await http.get(url);
       print(request.body);
       var data = jsonDecode(request.body);
+
       _saveTok(data['token']);
       _savechatId(data['chatfriendID']);
       _savetype(data['type']);
       _saveId(data['id']).then((v){
         if ("${data['success']}" == "1") {
+          data['type'] == "think"?pushNotificationsManager.thinkerSubscription():pushNotificationsManager.investorSubscription();
         getDataId(context , user_id: data['id'] ).then((v){
           Navigator.pushAndRemoveUntil(
           context,
