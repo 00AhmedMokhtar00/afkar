@@ -376,7 +376,7 @@ class _IdeaDetailsState extends State<IdeaDetails> {
             var data = jsonDecode(request.body);
             if(data["success"] == 1){
               PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
-              await pushNotificationsManager.sendNotification(data["firebaseAcess"], title: appState.name, body: "تم قبول فكرتك من قبل: ${appState.name}");
+              await pushNotificationsManager.sendNotification(data["firebaseAcess"], title: "", body: "تم قبول فكرتك من قِبل: ${appState.name}");
             }
             Navigator.pop(context);
           }
@@ -391,7 +391,7 @@ class _IdeaDetailsState extends State<IdeaDetails> {
   void _decline(){
     AppState appState = Provider.of<AppState>(context, listen: false);
     Navigator.push(context, MaterialPageRoute(
-      builder: (_) => Efada(investorId: appState.id, requestId: orderModel.number,)
+      builder: (_) => Efada(investorId: appState.id, requestId: orderModel.number, thinkerId: orderModel.userId, investorName: appState.name)
     ));
   }
 }

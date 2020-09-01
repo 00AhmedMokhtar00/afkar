@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 import 'package:afkar/alerts/alerts.dart';
+import 'package:afkar/firebase/push_notifications.dart';
 import 'package:afkar/models/investor/feedback_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:afkar/AppBar1.dart/appBar2.dart';
 import 'package:flutter/material.dart';
 
 class Efada extends StatefulWidget {
-  final String requestId, investorId;
+  final String requestId, investorId, thinkerId, investorName;
 
-  Efada({this.investorId, this.requestId});
+  Efada({this.investorId, this.requestId, this.thinkerId, this.investorName});
 
   @override
   _EfadaState createState() => _EfadaState();
@@ -183,6 +184,13 @@ class _EfadaState extends State<Efada> {
       var data = jsonDecode(response.body);
     }
     await alertTost("تم إرسال الإفادة بنجاح!");
+    var notificationUrl = "https://afkarestithmar.com/api/api.php?type=loginID&id=${widget.thinkerId}";
+    var request = await http.get(notificationUrl);
+    var data = jsonDecode(request.body);
+    if(data["success"] == 1){
+      PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
+      await pushNotificationsManager.sendNotification(data["firebaseAcess"], title: "", body: "تم رفض فكرتك من قِبل: ${widget.investorName}");
+    }
     Navigator.pop(context);
     Navigator.pop(context);
   }

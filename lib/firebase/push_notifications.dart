@@ -108,8 +108,8 @@ class PushNotificationsManager {
       body: jsonEncode(
         <String, dynamic>{
           'notification': <String, dynamic>{
-            'body': body,
-            'title': title
+            'body': body.isEmpty?null:body,
+            'title': title.isEmpty?null:title
           },
           'priority': 'high',
           'data': <String, dynamic>{
