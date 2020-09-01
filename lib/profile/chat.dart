@@ -233,9 +233,7 @@ class _ChatState extends State<Chat> {
           var request = await http.get(notificationUrl);
           var data = jsonDecode(request.body);
           if(data["success"] == 1){
-            print("TO: " + data["firebaseAcess"]);
             PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
-            //await pushNotificationsManager.sendNotificationToInvestors();
             await pushNotificationsManager.sendNotification(data["firebaseAcess"], title: appState.name, body: message);
           }
           getonChatData(myId , userId);

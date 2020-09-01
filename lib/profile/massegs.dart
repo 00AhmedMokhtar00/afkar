@@ -20,12 +20,6 @@ class _MassegsState extends State<Massegs> {
   Future messages;
 
   @override
-  void initState() {
-    //messages = getData();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar3(context, "الرسائل"),
