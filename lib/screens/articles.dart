@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:afkar/firebase/push_notifications.dart';
+import 'package:afkar/notifications/notify_manager.dart';
 import 'package:provider/provider.dart';
 
 import 'package:afkar/models/user_model.dart';
@@ -24,10 +25,9 @@ class _ArticlesState extends State<Articles> {
   bool t = false;
   @override
   void initState() {
-
     if(!t){
       PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
-      pushNotificationsManager.init(context).then((value) => pushNotificationsManager.sendNotificationToInvestors());
+      pushNotificationsManager.init(context);
       t = true;
     }
     getDataId(context).then((v){

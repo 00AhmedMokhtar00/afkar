@@ -65,6 +65,8 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
    buildTypes {
        release {
            signingConfig signingConfigs.release
+           useProguard true
+           proguardFiles getDefaultProguardFile('proguard-android.txt'), '/android/app/proguard-rules.pro'
        }
    }
 }

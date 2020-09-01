@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:afkar/notifications/notify_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:afkar/alerts/alerts.dart';
@@ -17,45 +18,52 @@ class PushNotificationsManager {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   bool _initialized = false;
 
+  void iOS_Permission() {
+    _firebaseMessaging.requestNotificationPermissions(
+        IosNotificationSettings(sound: true, badge: true, alert: true)
+    );
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings)
+    {
+      print("Settings registered: $settings");
+    });
+  }
+
   Future<void> init(BuildContext context) async {
     if (!_initialized) {
-      await _firebaseMessaging.requestNotificationPermissions(
-          const IosNotificationSettings(
-              sound: true, badge: true, alert: true, provisional: true
-          )
-      );
-      _firebaseMessaging.onIosSettingsRegistered
-          .listen((IosNotificationSettings settings) {
-        print("Settings registered: $settings");
-      });
+      if (Platform.isIOS) iOS_Permission();
+
       _firebaseMessaging.configure(
-        onBackgroundMessage: Platform.isAndroid ?myBackgroundMessageHandler:null,
+        //onBackgroundMessage: Platform.isAndroid ?myBackgroundMessageHandler:null,
         onMessage: (Map<String, dynamic> message) async {
           print("onMessage: $message");
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0), side: BorderSide(color: Theme.of(context).primaryColor)),
-              content: ListTile(
-                title: Text(message['notification']['title']),
-                subtitle: Text(message['notification']['body']),
-              ),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('حسناً', style: TextStyle(color: Colors.white),),
-                  color: Theme.of(context).primaryColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-          );
+          NotifyManager.show(title: message['notification']['title'], body: message['notification']['body']);
+//          showDialog(
+//            context: context,
+//            builder: (context) => AlertDialog(
+//              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0), side: BorderSide(color: Theme.of(context).primaryColor)),
+//              content: ListTile(
+//                title: Text(message['notification']['title']),
+//                subtitle: Text(message['notification']['body']),
+//              ),
+//              actions: <Widget>[
+//                FlatButton(
+//                  child: Text('حسناً', style: TextStyle(color: Colors.white),),
+//                  color: Theme.of(context).primaryColor,
+//                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+//                  onPressed: () => Navigator.of(context).pop(),
+//                ),
+//              ],
+//            ),
+//          );
         },
         onLaunch: (Map<String, dynamic> message) async {
           print("onLaunch: $message");
+          NotifyManager.show(title: message['notification']['title'], body: message['notification']['body']);
         },
         onResume: (Map<String, dynamic> message) async {
           print("onResume: $message");
+          NotifyManager.show(title: message['notification']['title'], body: message['notification']['body']);
         },
       );
 
