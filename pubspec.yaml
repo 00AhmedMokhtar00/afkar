@@ -1,7 +1,7 @@
 name: afkar
 description: A new Flutter project.
 
-version: 4.0.0+4
+version: 5.0.0+5
 
 environment:
   sdk: ">=2.3.0 <3.0.0"

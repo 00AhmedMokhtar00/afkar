@@ -2,6 +2,10 @@ import UIKit
 import Flutter
 import flutter_downloader
 import Firebase
+import FirebaseMessaging
+
+
+
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -18,6 +22,8 @@ import Firebase
     
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+    
+    
 }
 
 private func registerPlugins(registry: FlutterPluginRegistry) {
