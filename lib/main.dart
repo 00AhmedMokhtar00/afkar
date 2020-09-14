@@ -132,6 +132,7 @@ class _MyAppState extends State<MyApp> {
         locale: Locale('ar'),
         title: 'فكر وإستثمار',
         theme: ThemeData(
+          platform: TargetPlatform.android,
           fontFamily: 'Cairo',
           primaryColor: Color(0xffffc627),
           accentColor: Color(0xffffc627),
