@@ -1,0 +1,281 @@
+{
+  "allideas": [
+    {
+      "id": "55",
+      "uname": "محمد",
+      "thinker_id": "25",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "20000000.00",
+      "status": "2",
+      "details": "فكرة جامدة جدا بس هقولها في السر",
+      "title": "فكرة جامدة جدي",
+      "created_at": "2020-08-26 13:00:24",
+      "payed": "1",
+      "invest_users": [
+        {
+          "id": "26",
+          "name": "محمد",
+          "part": "2000000"
+        }
+      ],
+      "attach": "",
+      "attachs": [
+        "",
+        ""
+      ],
+      "invest_per": "52"
+    },
+    {
+      "id": "54",
+      "uname": "محمد",
+      "thinker_id": "25",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "500000.00",
+      "status": "1",
+      "details": "مشروع كبير اول حد ممكن يعمله",
+      "title": "مشروع كبير اول حد يعمل ",
+      "created_at": "2020-08-26 10:44:07",
+      "payed": "1",
+      "invest_users": [],
+      "attach": "",
+      "attachs": [
+        "",
+        ""
+      ],
+      "invest_per": "40"
+    },
+    {
+      "id": "47",
+      "uname": null,
+      "thinker_id": "1",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "100.00",
+      "status": "1",
+      "details": "22",
+      "title": "س",
+      "created_at": "2020-08-18 16:49:06",
+      "payed": "1",
+      "invest_users": [],
+      "attach": "",
+      "attachs": [
+        "userfiles\/x.pdf",
+        "userfiles\/y.pdf"
+      ],
+      "invest_per": "1"
+    },
+    {
+      "id": "46",
+      "uname": null,
+      "thinker_id": "1",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "100.00",
+      "status": "1",
+      "details": "22",
+      "title": "س",
+      "created_at": "2020-08-18 16:48:41",
+      "payed": "1",
+      "invest_users": [],
+      "attach": "",
+      "attachs": [
+        "userfiles\/x.pdf",
+        "userfiles\/y.pdf"
+      ],
+      "invest_per": "1"
+    },
+    {
+      "id": "44",
+      "uname": null,
+      "thinker_id": "1",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "100.00",
+      "status": "1",
+      "details": "22",
+      "title": "س",
+      "created_at": "2020-08-18 16:47:05",
+      "payed": "1",
+      "invest_users": [
+        {
+          "id": "26",
+          "name": "محمد",
+          "part": "5000"
+        }
+      ],
+      "attach": "",
+      "attachs": [
+        "userfiles\/x.pdf",
+        "userfiles\/y.pdf"
+      ],
+      "invest_per": "1"
+    },
+    {
+      "id": "43",
+      "uname": null,
+      "thinker_id": "1",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "100.00",
+      "status": "1",
+      "details": "22",
+      "title": "س",
+      "created_at": "2020-08-18 16:46:23",
+      "payed": "1",
+      "invest_users": [],
+      "attach": "",
+      "attachs": [
+        "x.pdf",
+        "y.pdf"
+      ],
+      "invest_per": "1"
+    },
+    {
+      "id": "42",
+      "uname": null,
+      "thinker_id": "1",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "100.00",
+      "status": "1",
+      "details": "22",
+      "title": "س",
+      "created_at": "2020-08-18 00:40:19",
+      "payed": "1",
+      "invest_users": [],
+      "attach": "",
+      "attachs": [
+        "x.pdf",
+        "y.pdf"
+      ],
+      "invest_per": "1"
+    },
+    {
+      "id": "39",
+      "uname": null,
+      "thinker_id": "1",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "100.00",
+      "status": "1",
+      "details": "22",
+      "title": "س",
+      "created_at": "2020-08-18 00:10:13",
+      "payed": "1",
+      "invest_users": [],
+      "attach": "",
+      "attachs": null,
+      "invest_per": "1"
+    },
+    {
+      "id": "34",
+      "uname": "محمد",
+      "thinker_id": "25",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "50000.00",
+      "status": "2",
+      "details": "لا يوجد",
+      "title": "تجريب",
+      "created_at": "2020-08-10 16:59:14",
+      "payed": "1",
+      "invest_users": [],
+      "attach": "userfiles\/5f3160c1989a9_example_018.pdf",
+      "attachs": null,
+      "invest_per": "10"
+    },
+    {
+      "id": "28",
+      "uname": "محمد",
+      "thinker_id": "25",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "25000.00",
+      "status": "2",
+      "details": "Google Engineering project",
+      "title": "Google ‎Engineering",
+      "created_at": "2020-08-09 08:24:18",
+      "payed": "1",
+      "invest_users": [],
+      "attach": "",
+      "attachs": null,
+      "invest_per": "3"
+    },
+    {
+      "id": "17",
+      "uname": "Mostafa",
+      "thinker_id": "70",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "99999999.99",
+      "status": "2",
+      "details": "details",
+      "title": "سيستم ادارة مشروعات",
+      "created_at": "2020-05-31 19:22:18",
+      "payed": "1",
+      "invest_users": [
+        {
+          "id": "26",
+          "name": "محمد",
+          "part": "5000"
+        }
+      ],
+      "attach": "",
+      "attachs": null,
+      "invest_per": "20"
+    },
+    {
+      "id": "2",
+      "uname": "doaaa",
+      "thinker_id": "10",
+      "domain_id": "1",
+      "domain_name": "هندسة كهربائية",
+      "proposed_price": "5000.00",
+      "status": "1",
+      "details": "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ta",
+      "title": "فكرة",
+      "created_at": "2020-04-06 22:32:46",
+      "payed": "1",
+      "invest_users": [
+        {
+          "id": "9",
+          "name": "Doaaa",
+          "part": "5000"
+        },
+        {
+          "id": "26",
+          "name": "محمد",
+          "part": "30"
+        },
+        {
+          "id": "26",
+          "name": "محمد",
+          "part": "3"
+        },
+        {
+          "id": "26",
+          "name": "محمد",
+          "part": "3"
+        },
+        {
+          "id": "26",
+          "name": "محمد",
+          "part": "3"
+        },
+        {
+          "id": "26",
+          "name": "محمد",
+          "part": "1"
+        }
+      ],
+      "attach": "",
+      "attachs": null,
+      "invest_per": "10"
+    }
+  ],
+  "countall": 12,
+  "success": 1,
+  "message": "تم التسجيل بنجاح"
+}
