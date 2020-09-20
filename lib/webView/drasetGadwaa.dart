@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:afkar/webView/nesab_model.dart';
 import 'package:afkar/webView/preview_file.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:flutter/material.dart';
@@ -125,6 +126,9 @@ class _HesabElNesabState extends State<HesabElNesab> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextFormField(
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(8),
+                  ],
                   textAlign: TextAlign.center,
                   controller: _projectMoneyController,
                   keyboardType: TextInputType.number,
@@ -143,6 +147,9 @@ class _HesabElNesabState extends State<HesabElNesab> {
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(2),
+                  ],
                   textAlign: TextAlign.center,
                   controller: _thinkerShareController,
                   focusNode: _thinkerSharefocusNode,
@@ -162,6 +169,9 @@ class _HesabElNesabState extends State<HesabElNesab> {
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(4),
+                  ],
                   textAlign: TextAlign.center,
                   controller: _rasElmalProfitController,
                   focusNode: _rasElmalProfitfocusNode,
@@ -176,7 +186,7 @@ class _HesabElNesabState extends State<HesabElNesab> {
                           borderSide: BorderSide(color: Theme.of(context).primaryColor)),
                       contentPadding: const EdgeInsets.all(5)
                   ),
-                  validator: (value) => double.parse(value) < 100.0 && double.parse(value) >= 1.0? null : "الرجاء إدخال عائد صحيح",
+                  validator: (value) => double.parse(value) <= 1000.0 && double.parse(value) >= 1.0? null : "الرجاء إدخال عائد صحيح",
                 ),
                 SizedBox(height: 40.0),
                 GestureDetector(

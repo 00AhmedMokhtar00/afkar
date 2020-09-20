@@ -24,7 +24,7 @@ class PreviewFile extends StatefulWidget {
 
 class _PreviewFileState extends State<PreviewFile> {
   Completer<WebViewController> _controller = Completer<WebViewController>();
-  List<_TaskInfo> _tasks;
+  List<_TaskInfo> _tasks = List();
   List<_ItemHolder> _items;
   bool _isLoading, downloaded = false;
   bool _permissionReady;
@@ -65,13 +65,13 @@ class _PreviewFileState extends State<PreviewFile> {
       DownloadTaskStatus status = data[1];
       int progress = data[2];
 
-      final task = _tasks?.firstWhere((task) => task.taskId == id);
-      if (task != null) {
-        setState(() {
-          task.status = status;
-          task.progress = progress;
-        });
-      }
+//      final task = _tasks != null?_tasks?.firstWhere((task) => task.taskId == id):null;
+//      if (task != null) {
+//        setState(() {
+//          task.status = status;
+//          task.progress = progress;
+//        });
+//      }
     });
   }
 

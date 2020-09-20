@@ -3,15 +3,14 @@ import 'dart:convert';
 import 'package:afkar/alerts/alerts.dart';
 import 'package:afkar/firebase/push_notifications.dart';
 import 'package:afkar/screens/Ideas/efada.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:afkar/AppBar1.dart/appBar2.dart';
 import 'package:afkar/models/thinker/order_model.dart';
 import 'package:afkar/profile/chat.dart';
-import 'package:afkar/screens/orders/order_details.dart';
 import 'package:afkar/webView/preview_file.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf_flutter/pdf_flutter.dart';
 
 import '../../main.dart';
 
@@ -184,6 +183,9 @@ class _IdeaDetailsState extends State<IdeaDetails> {
                 SizedBox(width: 5.0),
                 Expanded(
                   child: TextFormField(
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(9),
+                    ],
                     style: TextStyle(fontSize: 10.0),
                     textAlign: TextAlign.right,
                     controller: _investAmountController,
@@ -198,7 +200,7 @@ class _IdeaDetailsState extends State<IdeaDetails> {
                             borderSide: BorderSide(color: Theme.of(context).primaryColor)),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 10.0)
                     ),
-                    validator: (value) => value.isNotEmpty && double.parse(value) > 0? null : "الرجاء إدخال قيمة صحيحه",
+                    validator: (value) => value.isNotEmpty && double.parse(value) > 0 && double.parse(value) <= double.parse(orderModel.price)? null : "الرجاء إدخال قيمة صحيحه",
                   ),
                 )
               ],

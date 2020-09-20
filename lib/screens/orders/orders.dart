@@ -48,7 +48,6 @@ class _OrdersState extends State<Orders> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
-              reverse: true,
               physics: BouncingScrollPhysics(),
               itemCount: snapshot.data.length,
               itemBuilder: (context, i) {
@@ -230,7 +229,7 @@ class _OrdersState extends State<Orders> {
                     )
             ).toList()
         );
-
+        orderModels = List.from(orderModels.reversed);
         return orderModels;
       }
       print("HERE");

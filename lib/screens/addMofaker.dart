@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:afkar/backEnd/uploadAnyPhoto.dart';
 import 'package:afkar/firebase/push_notifications.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -73,6 +74,9 @@ class _AddMofakerState extends State<AddMofaker> {
                   children: <Widget>[
                     Flexible(
                         child: TextField(
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(9),
+                        ],
                         controller: conPrice,
                         keyboardType: TextInputType.number,
                         style: TextStyle(
@@ -95,6 +99,9 @@ class _AddMofakerState extends State<AddMofaker> {
                     SizedBox(width:10),
                     Flexible(
                         child: TextField(
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(2),
+                          ],
                         controller: conPer,
                         keyboardType: TextInputType.number,
                         style: TextStyle(
