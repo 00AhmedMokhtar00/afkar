@@ -82,22 +82,22 @@ Widget bottomNvBar(BuildContext context , {int index}){
                 ),
               ),
             Container(color: Color(0xffe2e2e2),height: 40,width: 1,),
-            GestureDetector(
-              onTap: ()
-              {Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile(appState.getid,appState.getid)));},
-                          child: Container(
-                width:MediaQuery.of(context).size.width*0.25,
-              height: 60,
-              color: index == 4 ? Colors.black12 : Theme.of(context).primaryColor,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:<Widget>[
-                  Image(image: AssetImage("images/profile.png"),width: 30,height: 28,),
-                  Text("صفحتي" , style: TextStyle(color:Colors.white, fontSize: 12),),
-                  ]
-                ),
-              ),
-            ),
+//            GestureDetector(
+//              onTap: ()
+//              {Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile(appState.getid,appState.getid)));},
+//                          child: Container(
+//                width:MediaQuery.of(context).size.width*0.25,
+//              height: 60,
+//              color: index == 4 ? Colors.black12 : Theme.of(context).primaryColor,
+//                child: Column(
+//                  mainAxisAlignment: MainAxisAlignment.center,
+//                  children:<Widget>[
+//                  Image(image: AssetImage("images/profile.png"),width: 30,height: 28,),
+//                  Text("صفحتي" , style: TextStyle(color:Colors.white, fontSize: 12),),
+//                  ]
+//                ),
+//              ),
+//            ),
           ],
         ),
       );
