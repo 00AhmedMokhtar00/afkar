@@ -26,6 +26,18 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_forward, color: Colors.white, size: 30.0,),
+          )
+        ],
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+      ),
         backgroundColor: Color(0xfff5f5f5),
         body: Container(
           width: MediaQuery.of(context).size.width,
@@ -49,7 +61,8 @@ class _LogInState extends State<LogIn> {
                     child: Image(image: AssetImage("images/logo3.png"))),
               ),
               Positioned(
-                bottom: 0,
+                bottom: MediaQuery.of(context).size.height * 0.08,
+
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                       maxHeight: MediaQuery.of(context).size.height * 0.46,
@@ -71,10 +84,12 @@ class _LogInState extends State<LogIn> {
                             child: Row(
                               children: <Widget>[
                                 Container(
-                                  padding: EdgeInsets.only(left: 15),
+                                  //padding: EdgeInsets.only(left: 6.0),
                                   alignment: Alignment.center,
                                   color: Color(0xffebebeb),
                                   child: CountryCodePicker(
+                                    flagWidth: 30.0,
+                                    textStyle: TextStyle(wordSpacing: 6.0),
                                     onChanged: (val) {
                                       setState(() {
                                         codeNational = val.dialCode;
@@ -91,7 +106,7 @@ class _LogInState extends State<LogIn> {
                                     alignLeft: false,
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                SizedBox(width: 6.0),
                                 Flexible(
                                   child: Stack(
                                     children: <Widget>[
@@ -192,12 +207,12 @@ class _LogInState extends State<LogIn> {
                         isLoading == true
                             ? CircularProgressIndicator()
                             : Container(),
-                        Text(
-                          "$message",
+                        message != null && message.isNotEmpty?Text(
+                          message,
                           style: TextStyle(color: Colors.red, fontSize: 13),
-                        ),
+                        ):Container(),
                         SizedBox(
-                          height: 15,
+                          height: 6.0,
                         ),
                         GestureDetector(
                           onTap: () {

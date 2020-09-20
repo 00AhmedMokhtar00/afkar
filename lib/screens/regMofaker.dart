@@ -215,20 +215,25 @@ class _RegMofakerState extends State<RegMofaker> {
   Future regesterMofaker(BuildContext context)async{
     String phone = "$codeNational${conPhone.text}";
     try{var url = "https://afkarestithmar.com/api/api.php?type=regthink&phone=$phone&pass=${conPass.text}&name=${conName.text}";
-        var request = await http.get(url);
+    print(url);
+    var request = await http.get(url);
         var data = jsonDecode(request.body);
         if("${data['success']}"== "1"){
           print(data);
           await verifay(phone);
           //Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyAccount()));
-        } 
+        } else{
+          setState(()  {
+            message = data['message'];
+          });
+        }
     }catch(e){
       print(e);
       setState(() {
-        isLoading = false;
         message = "$e";
       });
     }
+    setState(() => isLoading = false);
   }
 
   Future verifay(String phone)async{
@@ -241,6 +246,10 @@ class _RegMofakerState extends State<RegMofaker> {
       alertTost("${data['message']}");
       await pushNotificationsManager.thinkerSubscription();
       Navigator.push(context, MaterialPageRoute(builder: (context)=>LogIn()));
+      setState(() {
+        isLoading = false;
+        message = "";
+      });
     }
     }catch(e){
       print(e);

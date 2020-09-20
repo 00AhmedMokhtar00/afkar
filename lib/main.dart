@@ -152,7 +152,9 @@ class _MyAppState extends State<MyApp> {
               return Center(child: CircularProgressIndicator());
             }
           },
-        )));
+        )
+        )
+    );
   }
 
   Future<bool> getData() async {

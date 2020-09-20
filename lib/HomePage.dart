@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
       endDrawer: drawer(context),
       key: _scaffoldKey,
       backgroundColor: Color(0xfff5f5f5),
-      appBar: appBar(context,_scaffoldKey),
+      appBar: appBar(context,_scaffoldKey, loggedOut: true),
         body:  Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
                         width: MediaQuery.of(context).size.width*0.9,
                         height: MediaQuery.of(context).size.height*0.07,
                         color: Color(0xffffffff),
-                        child: Text("تخطي" ,style:TextStyle(fontSize:18, color: Colors.black54)),
+                        child: Text("تسجيل الدخول" ,style:TextStyle(fontSize:18, color: Colors.black54)),
                       ),
                   ),
 
