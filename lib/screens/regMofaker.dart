@@ -19,7 +19,7 @@ class RegMofaker extends StatefulWidget{
 
 class _RegMofakerState extends State<RegMofaker> {
   String message = "";
-  String codeNational = "";
+  String codeNational = "20";
   bool isLoading = false;
   TextEditingController conName = TextEditingController();
   TextEditingController conPass = TextEditingController();
@@ -71,7 +71,7 @@ class _RegMofakerState extends State<RegMofaker> {
                                         });
                                       },
                                       // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                                      initialSelection: 'IT',
+                                      initialSelection: 'EG',
                                       favorite: ['+966', 'SA'],
                                       // optional. Shows only country name and flag
                                       showCountryOnly: false,

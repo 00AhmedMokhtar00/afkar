@@ -142,12 +142,13 @@ class _ArticlesState extends State<Articles> {
     try{var url = "https://afkarestithmar.com/api/api.php?type=allarticles";
         var request = await http.get(url);
         var data = jsonDecode(request.body);
-
         if("${data['success']}"== "1"){
           for (var i = 0; i < data["articles"].length; i++) {
+            //print(data["articles"][i]["details"]);
              titles.add(data["articles"][i]["title"]);
              images.add(data["articles"][i]["img"]);
-             details.add(data["articles"][i]["details"]);
+             details.add(_removeHashes(data["articles"][i]["details"]));
+             
           }
           setState(() {
             
@@ -158,6 +159,11 @@ class _ArticlesState extends State<Articles> {
     }
 }
 
+  static String _removeHashes(String s){
+    s = s.replaceAll("&nbsp;", "");
+    s = s.replaceAll("&#34;", "");
+    return s;
+  }
 
   Future<UserModel> _getUserInformation(){
     AppState myState = Provider.of<AppState>(context,listen: false);
