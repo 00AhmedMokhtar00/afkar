@@ -464,7 +464,10 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
   }
 
   Future<File>_pickImageFromGallery() async {
-    return await FilePicker.getFile();
+    return await FilePicker.getFile(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
   }
 }
 

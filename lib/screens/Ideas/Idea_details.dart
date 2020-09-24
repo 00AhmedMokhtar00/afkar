@@ -116,33 +116,33 @@ class _IdeaDetailsState extends State<IdeaDetails> {
             ],
           ),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Image.asset("images/moneybox.png", width: 20.0, height: 20.0, fit: BoxFit.fill,),
-              SizedBox(
-                width: 3,
-              ),
-              Text(
-                "تم جمع: ",
-                style: TextStyle(color: Colors.black54, fontSize: 14),
-              ),
-            ],
-          ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Image.asset("images/money2.png", width: 20.0, height: 20.0, fit: BoxFit.fill,),
-              SizedBox(
-                width: 3,
-              ),
-              Text(
-                "المتبقي: ",
-                style: TextStyle(color: Colors.black54, fontSize: 14),
-              ),
-            ],
-          ),
+//          Row(
+//            mainAxisAlignment: MainAxisAlignment.start,
+//            children: <Widget>[
+//              Image.asset("images/moneybox.png", width: 20.0, height: 20.0, fit: BoxFit.fill,),
+//              SizedBox(
+//                width: 3,
+//              ),
+//              Text(
+//                "تم جمع: ",
+//                style: TextStyle(color: Colors.black54, fontSize: 14),
+//              ),
+//            ],
+//          ),
+//
+//          Row(
+//            mainAxisAlignment: MainAxisAlignment.start,
+//            children: <Widget>[
+//              Image.asset("images/money2.png", width: 20.0, height: 20.0, fit: BoxFit.fill,),
+//              SizedBox(
+//                width: 3,
+//              ),
+//              Text(
+//                "المتبقي: ",
+//                style: TextStyle(color: Colors.black54, fontSize: 14),
+//              ),
+//            ],
+//          ),
 
         ],
       ),
@@ -200,7 +200,7 @@ class _IdeaDetailsState extends State<IdeaDetails> {
                             borderSide: BorderSide(color: Theme.of(context).primaryColor)),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 10.0)
                     ),
-                    validator: (value) => value.isNotEmpty && double.parse(value) > 0 && double.parse(value) <= double.parse(orderModel.price)? null : "الرجاء إدخال قيمة صحيحه",
+                    validator: (value) => value.isNotEmpty && double.parse(value) > 0?double.parse(value) <= double.parse(orderModel.price)? null :"لا يمكنك المشاركه بقيمه اكبر من رأس مال المشروع!": "الرجاء إدخال قيمة صحيحه",
                   ),
                 )
               ],
@@ -288,7 +288,7 @@ class _IdeaDetailsState extends State<IdeaDetails> {
                 tilePadding: EdgeInsets.only(left: 10.0),
                   title: _mainTitle("تحميل المرفقات", icon: "images/attach.png"),
                 children: [
-                  orderModel.attachments != null?
+                  orderModel.attachments != null && !isAttachmentEmpty()?
                   Column(children: _getAttachments())
                       :
                   Center(child: Text("لا يوجد مرفقات"))
@@ -311,16 +311,31 @@ class _IdeaDetailsState extends State<IdeaDetails> {
             style: TextStyle(fontSize: 15),
           ),
           trailing: Icon(Icons.arrow_downward),
-          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => PreviewFile("https://invideas.com/$filePath", "مرفق المشروع"))),
+          onTap: () {
+            print("https://invideas.com/$filePath");
+            Navigator.push(context, MaterialPageRoute(builder: (_) => PreviewFile("https://invideas.com/$filePath", "مرفق المشروع")));
+          },
         )
     );
   }
 
   List<Widget> _getAttachments(){
 
-    return orderModel.attachments.map((attachment) =>
-        _attachmentItem(title: attachment.toString().replaceAll("userfiles", ""), filePath: attachment.toString())
-    ).toList();
+    return orderModel.attachments.map((attachment) {
+
+      return attachment.isNotEmpty?_attachmentItem(title: attachment.toString().replaceAll("userfiles", ""),
+          filePath: attachment.toString()):Container();
+    }
+      ).toList();
+  }
+
+  bool isAttachmentEmpty(){
+    int emptyAttachments = 0;
+    for(int i = 0 ; i < orderModel.attachments.length ; i++){
+      if(orderModel.attachments[i].isEmpty || !orderModel.attachments[i].toString().contains("pdf"))
+        emptyAttachments++;
+    }
+    return emptyAttachments == orderModel.attachments.length;
   }
 
   Widget _buttonsView(){

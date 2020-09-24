@@ -216,7 +216,10 @@ class _PreviewFileState extends State<PreviewFile> {
         RaisedButton(
           child: Text("حسناً", textAlign: TextAlign.center,),
           color: Theme.of(context).primaryColor,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+          },
         )
       ],
     )

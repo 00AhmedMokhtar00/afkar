@@ -81,7 +81,7 @@ Widget bottomNvBar(BuildContext context , {int index}){
             ),
                 ),
               ),
-            Container(color: Color(0xffe2e2e2),height: 40,width: 1,),
+            //Container(color: Color(0xffe2e2e2),height: 40,width: 1,),
 //            GestureDetector(
 //              onTap: ()
 //              {Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile(appState.getid,appState.getid)));},

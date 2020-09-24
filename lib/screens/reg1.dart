@@ -197,13 +197,9 @@ class _Reg1State extends State<Reg1> {
                       ),
                     ),
                     SizedBox(height:10),
-
                     Text(
                             "$message",
                             style: TextStyle(color: Colors.red, fontSize: 13),
-                          ),
-                          SizedBox(
-                            height: 15,
                           ),
                     GestureDetector(
                       onTap: (){

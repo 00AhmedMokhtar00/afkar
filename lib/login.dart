@@ -46,27 +46,26 @@ class _LogInState extends State<LogIn> {
               color: Color(0xfff5f5f5),
               image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage("images/backGround.png"))),
+                  image: AssetImage("images/backGround.png")
+              )
+          ),
           child: Stack(
             children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-              ),
+
               Positioned(
-                //top:MediaQuery.of(context).size.height*0.08,
                 width: MediaQuery.of(context).size.width,
-                child: Container(
-                    //height: MediaQuery.of(context).size.height * 0.53,
-                    child: Image(image: AssetImage("images/logo3.png"))),
+                child: Image(image: AssetImage("images/logo3.png")),
               ),
+
+
               Positioned(
-                bottom: MediaQuery.of(context).size.height * 0.08,
+                bottom: MediaQuery.of(context).size.height * 0.06,
 
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                       maxHeight: MediaQuery.of(context).size.height * 0.46,
-                      maxWidth: MediaQuery.of(context).size.width),
+                      maxWidth: MediaQuery.of(context).size.width
+                  ),
                   child: SingleChildScrollView(
                     child: Form(
                       child: Column(children: <Widget>[
@@ -237,9 +236,6 @@ class _LogInState extends State<LogIn> {
                                 style:
                                     TextStyle(fontSize: 20, color: Colors.white)),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
                         ),
                       ]),
                     ),

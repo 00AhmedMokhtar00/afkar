@@ -39,73 +39,72 @@ class _EfadaState extends State<Efada> {
           SizedBox(
             height: 10.0,
           ),
-          Flexible(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              //height: MediaQuery.of(context).size.height * 0.8,
-              color: Colors.white,
-              child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FutureBuilder<List<FeedbackModel>>(
-                  future: _getAllQuestions(),
-                  builder: (_, snapshot) {
-                    if (snapshot.hasData) {
-                      return Column(
-                      children: snapshot.data.map((question) =>
-                          question.answerType == "text"?Container():CheckboxListTile(
-                            title: Text(question.title),
-                            value: selectedList.contains(question.id),
-                            onChanged: (value) {
-                              setState(() {
-                                if (value) {
-                                  selectedList.add(question.id);
-                                  selectedQuestions.add(question.title);
-                                }
-                                else {
-                                  selectedList.remove(question.id);
-                                  selectedQuestions.remove(question.title);
-                                }
-                              });
-                            },
-                          )
-                      ).toList(),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text(snapshot.error);
-                    } else {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                  },
-                ),
-                SizedBox(height: 20.0),
-                Text("أخرى"),
-                TextFormField(
-                  textAlign: TextAlign.center,
-                  controller: _controller,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.done,
-                  enableSuggestions: true,
-                  autocorrect: true,
-                  minLines: 6,
-                  maxLines: 6,
-                  decoration: InputDecoration(
-                      hintText: "إكتب ملاحظتك",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor)),
-                      contentPadding: const EdgeInsets.all(5)),
-                  validator: (value) =>
-                      value.isNotEmpty ? null : "الرجاء كتابة الملاحظة",
-                ),
-                SizedBox(height: 20.0),
-              ],
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            //height: MediaQuery.of(context).size.height * 0.8,
+            color: Colors.white,
+            child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FutureBuilder<List<FeedbackModel>>(
+                future: _getAllQuestions(),
+                builder: (_, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                    children: snapshot.data.map((question) =>
+                        question.answerType == "text"?Container():CheckboxListTile(
+                          title: Text(question.title),
+                          value: selectedList.contains(question.id),
+                          onChanged: (value) {
+                            setState(() {
+                              if (value) {
+                                selectedList.add(question.id);
+                                selectedQuestions.add(question.title);
+                              }
+                              else {
+                                selectedList.remove(question.id);
+                                selectedQuestions.remove(question.title);
+                              }
+                            });
+                          },
+                        )
+                    ).toList(),
+                    );
+                  }
+                  else if (snapshot.hasError) {
+                    return Center(child: Text(snapshot.error));
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
               ),
+              SizedBox(height: 20.0),
+              Text("أخرى"),
+              TextFormField(
+                textAlign: TextAlign.center,
+                controller: _controller,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                enableSuggestions: true,
+                autocorrect: true,
+                minLines: 6,
+                maxLines: 6,
+                decoration: InputDecoration(
+                    hintText: "إكتب ملاحظتك",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor)),
+                    contentPadding: const EdgeInsets.all(5)),
+                validator: (value) =>
+                    value.isNotEmpty ? null : "الرجاء كتابة الملاحظة",
+              ),
+              SizedBox(height: 20.0),
+            ],
             ),
-            ),
+          ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
