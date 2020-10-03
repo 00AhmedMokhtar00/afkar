@@ -1,10 +1,8 @@
 import 'dart:convert';
+import 'package:afkar/alerts/alerts.dart';
 import 'package:afkar/backEnd/getDataId.dart';
-import 'package:afkar/backEnd/updateImage.dart';
 import 'package:afkar/backEnd/uploadImage.dart';
 import 'package:afkar/main.dart';
-import 'package:afkar/profile/profile.dart';
-import 'package:afkar/profile/viewPhoto.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -30,8 +28,9 @@ class UpdateProfile extends StatefulWidget {
 
 class _UpdateProfileState extends State<UpdateProfile> {
   final _formKey = GlobalKey<FormState>();
-  String messageGren = "";
-  String messageRed = "";
+  bool dataUpdated = false;
+  //String messageGren = "";
+  //String messageRed = "";
   TextEditingController _controllerAbout;
   String name, img, details, email, phone, password;
   @override
@@ -66,7 +65,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
   }
 
   _initialView(){
-    AppState appState = Provider.of<AppState>(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -237,27 +235,38 @@ class _UpdateProfileState extends State<UpdateProfile> {
     AppState appState = Provider.of<AppState>(context);
     return Column(children: <Widget>[
       GestureDetector(
-          onTap: () {
-            _asyncChangesDialog(context, "الاسم", "name");
-          },
+          onTap: () async{
+            bool updated = await _asyncChangesDialog(context, "الاسم", "name", "n");
+            if(updated && !dataUpdated) {
+              setState(() => dataUpdated = true);
+            }
+            },
           child: customCard(Icons.person, "الاسم كاملاً", appState.name)
       ),
       GestureDetector(
-          onTap: () {
-            _asyncChangesDialog(
-                context, "البريد الالكتروني", "email");
+          onTap: () async{
+            bool updated = await _asyncChangesDialog(context, "البريد الالكتروني", "email", "e");
+            if(updated && !dataUpdated) {
+              setState(() => dataUpdated = true);
+            }
           },
           child: customCard(
               Icons.message, "البريد الالكتروني", appState.email)
       ),
       GestureDetector(
-          onTap: () {
-            _asyncChangesDialog(context, "رقم الهاتف", "phone");
+          onTap: () async{
+            bool updated = await _asyncChangesDialog(context, "رقم الهاتف", "phone", "p");
+            if(updated && !dataUpdated) {
+              setState(() => dataUpdated = true);
+            }
           },
           child: customCard(Icons.phone, "رقم الجوال", appState.phone)),
       GestureDetector(
-          onTap: () {
-            _asyncPasswordDialog(context);
+          onTap: () async{
+            bool updated = await _asyncPasswordDialog(context);
+            if(updated && !dataUpdated) {
+              setState(() => dataUpdated = true);
+            }
           },
           child: customCard(
               Icons.confirmation_number, "تحديث كلمة المرور", "")
@@ -271,7 +280,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
       alignment: Alignment.center,
       width: 200,
       child: Text(
-        "$messageGren",
+        "",
         overflow: TextOverflow.ellipsis,
         textAlign: TextAlign.left,
         style: TextStyle(
@@ -287,7 +296,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
       alignment: Alignment.center,
       width: 200,
       child: Text(
-        "$messageRed",
+        "",
         overflow: TextOverflow.ellipsis,
         textAlign: TextAlign.left,
         style: TextStyle(
@@ -309,9 +318,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
         child: RaisedButton(
           padding:
           EdgeInsets.only(top: 5, bottom: 5, right: 30, left: 30),
-          onPressed: () {
-            setData();
-          },
+          onPressed: dataUpdated?() async{
+            await setData();
+            setState(() => dataUpdated = false);
+          }:null,
           shape: new RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30)),
           child: Text(
@@ -430,13 +440,13 @@ class _UpdateProfileState extends State<UpdateProfile> {
         });
   }
 
-  Future<String> _asyncChangesDialog(
-      BuildContext context, String type, String object) async {
+  Future<bool> _asyncChangesDialog(
+      BuildContext context, String type, String object, String classify) async {
     var size = MediaQuery.of(context).size;
     final double height = size.height;
     double fontsmll = height / 36;
     TextEditingController _controller = TextEditingController();
-    return showDialog<String>(
+    return showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -449,44 +459,33 @@ class _UpdateProfileState extends State<UpdateProfile> {
           content: Form(
             key: _formKey,
             child: TextFormField(
+              validator: classify == "e"?(value) => value.length > 6 && value.contains("@")?null:"الرجاء إدخال بريك إلكتروني صحيح" : (input) => input.isEmpty ? 'برجاء ملئ هذا الحقل' : null,
+              keyboardType: classify == "e"? TextInputType.emailAddress:classify == "p"? TextInputType.phone:TextInputType.text,
               style: TextStyle(
-                fontSize: fontsmll * 0.9,
+                fontSize: fontsmll * 0.8,
                 fontFamily: 'cairo',
               ),
               decoration: InputDecoration(
                 labelStyle: TextStyle(
-                  fontSize: fontsmll * 0.9,
+                  fontSize: fontsmll * 0.8,
                   fontFamily: 'cairo',
                 ),
                 hintStyle: TextStyle(
-                    fontSize: fontsmll * 0.9,
+                    fontSize: fontsmll * 0.8,
                     fontFamily: 'cairo',
                     color: Colors.black26),
                 labelText: 'اكتب $type المراد استبداله',
                 hintText: '',
               ),
               controller: _controller,
-              validator: (input) =>
-                  input.isEmpty ? 'برجاء ملئ هذا الحقل' : null,
             ),
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('الغاء',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontSize: fontsmll * 0.85,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black)),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
               child: Text('تأكيد',
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      fontSize: fontsmll * 0.85,
+                      fontSize: fontsmll * 0.75,
                       fontWeight: FontWeight.normal,
                       color: Colors.black)),
               onPressed: () {
@@ -495,27 +494,39 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     object == "name"
                         ? this.name = _controller.text
                         : object == "phone"
-                            ? this.phone = _controller.text
-                            : this.email = _controller.text;
+                        ? this.phone = _controller.text
+                        : this.email = _controller.text;
                   });
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 }
               },
             ),
+            FlatButton(
+              child: Text('الغاء',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontSize: fontsmll * 0.75,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black)),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+
           ],
         );
       },
-    );
+    )??false;
   }
 
-  Future<String> _asyncPasswordDialog(BuildContext context) async {
+  Future<bool> _asyncPasswordDialog(BuildContext context) async {
     AppState appState = Provider.of<AppState>(context, listen: false);
     var size = MediaQuery.of(context).size;
     final double height = size.height;
     double fontsmll = height / 36;
     TextEditingController _controller = TextEditingController();
     TextEditingController _controller2 = TextEditingController();
-    return showDialog<String>(
+    return showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -578,17 +589,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('الغاء',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontSize: fontsmll * 0.85,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black)),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
               child: Text('تأكيد',
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -605,6 +605,17 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 }
               },
             ),
+            FlatButton(
+              child: Text('الغاء',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontSize: fontsmll * 0.85,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
           ],
         );
       },
@@ -613,10 +624,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   setData() async {
     AppState appState = Provider.of<AppState>(context, listen: false);
-    setState(() {
-      messageRed = "";
-      messageGren = "";
-    });
+//    setState(() {
+//      messageRed = "";
+//      messageGren = "";
+//    });
     try {
       var url =
           "https://afkarestithmar.com/api/api.php?type=updateAll&id=${appState.id}&name=${name??appState.name}&Mobile=${phone??appState.phone}&img=${widget.uploadedImage??appState.image}&about=${_controllerAbout.text.trim().isNotEmpty?_controllerAbout.text.trim():""}&Email=${email??appState.email}";
@@ -625,27 +636,17 @@ class _UpdateProfileState extends State<UpdateProfile> {
       var data = jsonDecode(request.body);
       if ("${data['success']}" == "1") {
         getDataId(context);
-        setState(() {
-          messageGren = data["message"];
-        });
-      } else {
-        setState(() {
-          messageRed = data['message'];
-        });
+        alertTost("تم تعديل البيانات بنجاح");
+      }else {
+        alertTost(data["message"]);
       }
     } catch (e) {
       print(e.toString());
-      setState(() {
-        messageRed = "$e";
-      });
+      alertTost(e.toString());
     }
   }
 
   updatePass(String id, String password) async {
-    setState(() {
-      messageRed = "";
-      messageGren = "";
-    });
     try {
       var url =
           "https://afkarestithmar.com/api/api.php?type=updatepass&pass=$password&id=$id";
@@ -653,19 +654,13 @@ class _UpdateProfileState extends State<UpdateProfile> {
       print(request.body);
       var data = jsonDecode(request.body);
       if ("${data['success']}" == "1") {
-        setState(() {
-          messageGren = "تم تحديث كلمة المرور";
-        });
+        alertTost("تم تحديث كلمة المرور");
       } else {
-        setState(() {
-          messageRed = data['message'];
-        });
+        alertTost(data['message']);
       }
     } catch (e) {
       print(e);
-      setState(() {
-        messageRed = "Error From Server or Network";
-      });
+      alertTost("Error From Server or Network");
     }
   }
 }

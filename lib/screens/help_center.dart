@@ -180,11 +180,12 @@ class _HelpCenterState extends State<HelpCenter> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
           title: Text("تم إستقبال الإستفسار بنجاح!", textAlign: TextAlign.center, style: TextStyle(color: Colors.green),),
           actions: [
-            Center(child: RaisedButton(
+            Center(
+                child: RaisedButton(
               color: Theme.of(context).primaryColor,
               onPressed: (){
+                Navigator.pop(context, true);
                 _clearFields();
-                Navigator.pop(context);
                 },
               child: Text("حسناً", style: TextStyle(color: Colors.white),),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),

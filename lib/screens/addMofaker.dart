@@ -415,20 +415,6 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: 120,
-                          height: 50,
-                          color: Theme.of(context).primaryColor,
-                          child: Text("الخلف",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -453,9 +439,23 @@ class _Cont1AddMofakerState extends State<Cont1AddMofaker> {
                           color: Theme.of(context).primaryColor,
                           child: Text("التالي",
                               style:
+                              TextStyle(fontSize: 18, color: Colors.white)),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 120,
+                          height: 50,
+                          color: Theme.of(context).primaryColor,
+                          child: Text("الخلف",
+                              style:
                                   TextStyle(fontSize: 18, color: Colors.white)),
                         ),
-                      )
+                      ),
                     ])
               ],
             ),

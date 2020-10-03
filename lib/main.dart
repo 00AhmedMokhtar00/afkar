@@ -171,3 +171,10 @@ class _MyAppState extends State<MyApp> {
     return id == null;
   }
 }
+
+// Test Credentials:
+
+// Thinker: 966 569148737
+// Investor: 201033476795
+// Pass: 123456
+

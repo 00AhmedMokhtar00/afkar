@@ -10,6 +10,5 @@ Future alertTost(String message) {
         timeInSecForIosWeb: 1,
         backgroundColor: Color(0xff222222),
         textColor: Colors.white,
-        fontSize: 18.0
     );
 }

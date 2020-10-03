@@ -121,15 +121,50 @@ Widget drawer(BuildContext context) {
                   context, "الشروط والأحكام", "images/terms2.png")),
 
           GestureDetector(
-              onTap: () {
-                appState.signOut();
-                _deleteData().then((v) {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyApp()),
-                    (Route<dynamic> route) => false,
-                  );
-                });
+              onTap: () async{
+                bool confirmed = await showDialog(
+                    context: context,
+                    child: AlertDialog(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+                      title: Column(
+                        children: [
+                          Text("هل تريد تسجيل الخروج من التطبيق؟", textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 16.0),),
+                          SizedBox(height: 8.0,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              RaisedButton(
+                                color: Theme.of(context).primaryColor,
+                                onPressed: (){
+                                  Navigator.pop(context, true);
+                                },
+                                child: Text("نعم", style: TextStyle(color: Colors.white),),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+                              ),
+                              RaisedButton(
+                                color: Theme.of(context).primaryColor,
+                                onPressed: (){
+                                  Navigator.pop(context, false);
+                                },
+                                child: Text("لا", style: TextStyle(color: Colors.white),),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                )??false;
+                if(confirmed) {
+                  appState.signOut();
+                  _deleteData().then((v) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyApp()),
+                          (Route<dynamic> route) => false,
+                    );
+                  });
+                }
               },
               child: customListElement(
                   context, "تسجيل الخروج", "images/logout.png")),
