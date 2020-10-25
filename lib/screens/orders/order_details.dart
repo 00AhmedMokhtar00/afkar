@@ -67,7 +67,6 @@ class _OrderDetailsState extends State<OrderDetails> {
   }
 
   Widget orderCard() {
-    //AppState appState = Provider.of<AppState>(context);
     return Container(
       padding: EdgeInsets.only(left: 5, right: 5),
       margin: EdgeInsets.all(4),
@@ -270,7 +269,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           children: [
             _mainTitle("المرفقات"),
 
-            orderModel.attachments != null || (orderModel.attachments.first != "" && orderModel.attachments.last != "")?
+            orderModel.attachments != null && (orderModel.attachments.first != "" || orderModel.attachments.last != "")?
             Column(children: _getAttachments())
                 :
             Center(child: Text("لا يوجد مرفقات"))
