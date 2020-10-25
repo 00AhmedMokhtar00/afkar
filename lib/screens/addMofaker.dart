@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:afkar/backEnd/uploadAnyPhoto.dart';
 import 'package:afkar/firebase/push_notifications.dart';
+import 'package:afkar/screens/articles.dart';
+import 'package:afkar/screens/verify_idea.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -14,13 +16,15 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:material_dropdown_formfield/material_dropdown_formfield.dart';
 
+import 'orders/orders.dart';
+
 class AddMofaker extends StatefulWidget {
   @override
   _AddMofakerState createState() => _AddMofakerState();
 }
 
 class _AddMofakerState extends State<AddMofaker> {
-  String data;
+  String domainID;
   String statu ;
   FocusNode focusNode = FocusNode();
 
@@ -32,7 +36,7 @@ class _AddMofakerState extends State<AddMofaker> {
   @override
   void initState() {
     super.initState();
-    data = '';
+    domainID = '';
     statu = '';
   }
 
@@ -158,16 +162,16 @@ class _AddMofakerState extends State<AddMofaker> {
                       labelText: "",
                       borderColor: Colors.white),
                   hintText: '-- المجال المفضل --',
-                  value: data,
+                  value: domainID,
                   onSaved: (value) {
                     setState(() {
-                      data = value;
+                      domainID = value;
                     });
                   },
                   onChanged: (value) {
                     setState(() {
-                      data = value;
-                      print(data);
+                      domainID = value;
+                      print(domainID);
                     });
                   },
                   dataSource: dataSource,
@@ -234,14 +238,16 @@ class _AddMofakerState extends State<AddMofaker> {
                   onTap: () {
                     if(conTitle.text.trim() == "" || conPrice.text.trim() == "" 
                     ||  conPer.text.trim() == "" ||  conAbout.text.trim() == ""
-                    || statu == "" || data == ""){
+                    || statu == "" || domainID == ""){
                       alertTost("يرجي ملئ جميع الحقول");
                     }else{
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => Cont1AddMofaker(conTitle.text,
-                                conPrice.text,conPer.text , data ,statu, conAbout.text , conCode.text)));
+                                conPrice.text,conPer.text , domainID ,statu, conAbout.text , conCode.text)
+                        )
+                    );
                     }
                   },
                   child: Container(
@@ -476,11 +482,11 @@ class Cont2AddMofaker extends StatefulWidget {
   final String price;
   final String per;
   final String state;
-  final String data;
+  final String domainID;
   final String about;
   final String code;
   final File _file1, _file2;
-  Cont2AddMofaker(this.title, this.price,this.per ,this.data , this.state, this.about, this.code , this._file1, this._file2);
+  Cont2AddMofaker(this.title, this.price,this.per ,this.domainID , this.state, this.about, this.code , this._file1, this._file2);
 
   @override
   _Cont2AddMofakerState createState() => _Cont2AddMofakerState();
@@ -533,16 +539,86 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
                     final String path1 = await uploadAnyPhoto(widget._file1);
                     if(widget._file2 != null){
                       final String path2 = await uploadAnyPhoto(widget._file2);
-                      await getTalabaty(context , "userfiles/$path1", "userfiles/$path2");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => Cont3AddMofaker(
+                                domainID: widget.domainID,
+                                title: widget.title,
+                                price: widget.price,
+                                about: widget.about,
+                                code: widget.code,
+                                per: widget.per,
+                                state: widget.state,
+                                ur2: "userfiles/$path2",
+                                ur: "userfiles/$path1",
+                              )
+                          )
+
+                      );
+                      //await getTalabaty(context , "userfiles/$path1", "userfiles/$path2");
                     }else{
-                      await getTalabaty(context , "userfiles/$path1", "");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => Cont3AddMofaker(
+                                domainID: widget.domainID,
+                                title: widget.title,
+                                price: widget.price,
+                                about: widget.about,
+                                code: widget.code,
+                                per: widget.per,
+                                state: widget.state,
+                                ur2: "",
+                                ur: "userfiles/$path1",
+                              )
+                          )
+
+                      );
+                      //await getTalabaty(context , "userfiles/$path1", "");
                     }
                   }else {
                     final String path2 = await uploadAnyPhoto(widget._file2);
-                    await getTalabaty(context , "", "userfiles/$path2");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => Cont3AddMofaker(
+                              domainID: widget.domainID,
+                              title: widget.title,
+                              price: widget.price,
+                              about: widget.about,
+                              code: widget.code,
+                              per: widget.per,
+                              state: widget.state,
+                              ur2: "userfiles/$path2",
+                              ur: "",
+                            )
+                        )
+
+                    );
+                    //await getTalabaty(context , "", "userfiles/$path2");
+
                   }
                 }else{
-                  await getTalabaty(context , "", "");
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => Cont3AddMofaker(
+                          domainID: widget.domainID,
+                          title: widget.title,
+                          price: widget.price,
+                          about: widget.about,
+                          code: widget.code,
+                          per: widget.per,
+                          state: widget.state,
+                          ur2: "",
+                          ur: "",
+                        )
+                    )
+
+                  );
+                   //await getTalabaty(context , "", "");
                 }
 
                 setState(() => isLoading = false);
@@ -561,32 +637,26 @@ class _Cont2AddMofakerState extends State<Cont2AddMofaker> {
       ),
     );
   }
-  // TODO
-  Future getTalabaty(BuildContext context , String ur, String ur2)async{
-    PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
-    AppState appState = Provider.of<AppState>(context,listen: false);
-    try{
-      var url = "https://afkarestithmar.com/api/api.php?type=addrequest&domain_id=${widget.data}&proposed_price=${widget.price}&status=${widget.state}&details=${widget.about}&title=${widget.title}&user_id=${appState.getid}&promocode=${widget.code}&attachs=\'$ur\',\'$ur2\'&invest_per=${widget.per}";
-      print(url);
-      var request = await http.get(url);
-        var data = jsonDecode(request.body);
-        if("${data['success']}"== "1"){
-          print(data);
-          alertTost("${data["message"]}");
-          pushNotificationsManager.sendNotificationToInvestors();
-          Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pop(context);
-
-        } 
-    }catch(e){
-      print(e);
-      alertTost(e.toString());
-    }
-}
 }
 
-class Cont3AddMofaker extends StatelessWidget {
+class Cont3AddMofaker extends StatefulWidget {
+  String domainID, price, state, about, title, code, ur, ur2, per;
+  Cont3AddMofaker({
+    this.domainID,
+    this.price,
+    this.state,
+    this.about,
+    this.title,
+    this.code,
+    this.ur,
+    this.ur2,
+    this.per
+  });
+  @override
+  _Cont3AddMofakerState createState() => _Cont3AddMofakerState();
+}
+
+class _Cont3AddMofakerState extends State<Cont3AddMofaker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -613,7 +683,7 @@ class Cont3AddMofaker extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "تكلفة ارسال فكرة المشروع للمستثمر هي 200 ريال تدفع لمرة واحدة ستصلك العروض الاستثمارية علي بريدك الالكتروني وحسابك داخل التطبيق",
+                          "يجب دفع تكلفة ارسال فكرة المشروع للمستثمر، وتدفع لمرة واحدة، ستصلك العروض الاستثمارية علي بريدك الالكتروني وحسابك داخل التطبيق",
                           style: TextStyle(
                               color: Colors.black54,
                               fontSize: 15,
@@ -625,30 +695,54 @@ class Cont3AddMofaker extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
-                Row(
+                Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () async{
+                          await getTalabaty(pay: true);
+                        },
                         child:Container(
                         alignment: Alignment.center,
-                        width: 120,
+                        //width: 120,
                         height: 50,
                         color: Theme.of(context).primaryColor,
-                        child: Text("دفع وارسال",
+                        child: Text("الإنتقال إلى صفحة الدفع",
                             style:
-                                TextStyle(fontSize: 18, color: Colors.white)),
+                                TextStyle(fontSize: 16, color: Colors.white)),
                       ),
                       ),
+                      SizedBox(height: 20.0),
+                      GestureDetector(
+                        onTap: () async{
+                          await getTalabaty();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (_) => Orders()
+                              )
+                          );
+                        },
+                        child:Container(
+                          alignment: Alignment.center,
+                          //width: 120,
+                          height: 50,
+                          color: Theme.of(context).primaryColor,
+                          child: Text("إدفع لاحقاً",
+                              style:
+                              TextStyle(fontSize: 16, color: Colors.white)),
+                        ),
+                      ),
+                      SizedBox(height: 20.0),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          Navigator.pop(context);
+                          Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (_) => Articles())
+                          );
                         },
                         child: Container(
                           alignment: Alignment.center,
-                          width: 120,
+                          //width: 120,
                           height: 50,
                           color: Theme.of(context).primaryColor,
                           child: Text("الغاء",
@@ -659,6 +753,32 @@ class Cont3AddMofaker extends StatelessWidget {
                     ])
               ],
             ))));
+  }
+
+
+  Future getTalabaty({bool pay = false})async{
+    PushNotificationsManager pushNotificationsManager = PushNotificationsManager();
+    AppState appState = Provider.of<AppState>(context,listen: false);
+    try{
+      var url = "https://afkarestithmar.com/api/api.php?type=addrequest&domain_id=${widget.domainID}&proposed_price=${widget.price}&status=${widget.state}&details=${widget.about}&title=${widget.title}&user_id=${appState.getid}&promocode=${widget.code}&attachs=\'${widget.ur}\',\'${widget.ur2}\'&invest_per=${widget.per}";
+      print(url);
+      var request = await http.get(url);
+      var data = jsonDecode(request.body);
+      if("${data['success']}"== "1"){
+        print(data);
+        alertTost("${data["message"]}");
+        pushNotificationsManager.sendNotificationToInvestors();
+        if(pay){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => VerifyIdea(ideaID: data["request_id"].toString()))
+          );
+        }
+      }
+    }catch(e){
+      print(e);
+      alertTost(e.toString());
+    }
   }
 }
 
