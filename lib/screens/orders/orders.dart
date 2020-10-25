@@ -29,7 +29,7 @@ class _OrdersState extends State<Orders> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xfff4f4f4),
-        appBar: appBar3(context, "طلباتي"),
+        appBar: appBar3(context, "طلباتي", toMain: true),
         body: _initialView()
     );
   }
@@ -223,7 +223,7 @@ class _OrdersState extends State<Orders> {
                       attachments: order["attachs"],
                       domainId: order["domain_id"],
                       investPercentage: order["invest_per"],
-                      payed: order["payed"],
+                      payed: order["payed"].toString(),
                       investUsers: order["invest_users"],
                       status: order["status"],
                       userName: order["uname"]

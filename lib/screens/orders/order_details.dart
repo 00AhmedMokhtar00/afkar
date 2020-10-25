@@ -6,6 +6,8 @@ import 'package:afkar/utils/helper_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf_flutter/pdf_flutter.dart';
 
+import '../verify_idea.dart';
+
 class OrderDetails extends StatefulWidget {
   OrderModel orderModel;
 
@@ -26,12 +28,29 @@ class _OrderDetailsState extends State<OrderDetails> {
     return Scaffold(
         backgroundColor: Color(0xfff4f4f4),
         appBar: appBar3(context, "#"+orderModel.number),
-        body: _initialView());
+        body: _initialView(),
+        floatingActionButton: orderModel.payed == "1"?null:_payNow(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
   }
 
 ///////////////////////////////////////////////////////////
 //////////////////// Widget methods ///////////////////////
 ///////////////////////////////////////////////////////////
+
+  Widget _payNow(){
+    return RaisedButton(
+      color: Theme.of(context).primaryColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      child: Text("إدفع الآن لتفعيل الفكرة", style: TextStyle(color: Colors.white),),
+      onPressed: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => VerifyIdea(ideaID: orderModel.number))
+        );
+      },
+    );
+  }
 
   Widget _initialView() {
     return Container(
