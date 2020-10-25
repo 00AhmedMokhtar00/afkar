@@ -116,13 +116,8 @@ class _Reg2State extends State<Reg2> {
         print(request.body);
 
         if(data['success'] == "1"){
-          String verifyUrl = "https://afkarestithmar.com/api/api.php?type=payedactiviateacc&token=${data['token']}";
-          http.Response verifyResponse = await http.get(verifyUrl);
-          var decodedBody = jsonDecode(verifyResponse.body);
-          print(verifyResponse.body);
-          await alertTost(data['message']);
           pushNotificationsManager.investorSubscription();
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>LogIn()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyAccount(id: data["user_id"].toString(), token: data["token"],)));
         } else{
           await alertTost(data['message']);
           Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));

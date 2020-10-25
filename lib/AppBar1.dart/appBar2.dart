@@ -22,15 +22,16 @@ Widget appBar2(BuildContext context , String title , String image){
 }
 
 
-Widget appBar3(BuildContext context , String title){
+Widget appBar3(BuildContext context , String title, {bool back = true}){
     return AppBar(
     centerTitle: true,
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios),
+        automaticallyImplyLeading: false,
+        leading: back?IconButton(icon: Icon(Icons.arrow_back_ios),
         color: Colors.black54,
          onPressed: (){
           //Navigator.push(context, MaterialPageRoute(builder: (_) => Articles()));
           Navigator.pop(context);
-        }),
+        }):null,
         title: Text("$title" , style: TextStyle(color:Colors.white),),
       );
 }

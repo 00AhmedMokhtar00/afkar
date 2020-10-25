@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:afkar/HomePage.dart';
 import 'package:afkar/backEnd/getDataId.dart';
 import 'package:afkar/main.dart';
 import 'package:afkar/screens/articles.dart';
@@ -31,7 +32,12 @@ class _LogInState extends State<LogIn> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => HomePage()
+                )
+            ),
             icon: Icon(Icons.arrow_forward, color: Colors.white, size: 30.0,),
           )
         ],

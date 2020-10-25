@@ -15,11 +15,11 @@ class _Reg1State extends State<Reg1> {
   String message = "";
   String codeNational = "20";
   File _image;
-  TextEditingController conName = TextEditingController();
-  TextEditingController conEmail = TextEditingController();
-  TextEditingController conPass = TextEditingController();
+  TextEditingController conName   = TextEditingController();
+  TextEditingController conEmail  = TextEditingController();
+  TextEditingController conPass   = TextEditingController();
   TextEditingController conRePass = TextEditingController();
-  TextEditingController conPhone = TextEditingController();
+  TextEditingController conPhone  = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
