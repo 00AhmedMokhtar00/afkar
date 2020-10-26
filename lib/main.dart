@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
 import 'notifications/notify_manager.dart';
 
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await FlutterDownloader.initialize();
   await NotifyManager.initializeLocalNotification();
 

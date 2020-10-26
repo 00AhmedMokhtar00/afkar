@@ -5,7 +5,7 @@ import 'package:afkar/alerts/alerts.dart';
 import 'package:afkar/login.dart';
 import 'package:http/http.dart' as http;
 import 'package:afkar/firebase/push_notifications.dart';
-import 'package:flutter_inappbrowser/flutter_inappbrowser.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:afkar/AppBar1.dart/appBar2.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +42,7 @@ class _VerifyIdeaState extends State<VerifyIdea> {
         leading: IconButton(icon: Icon(Icons.clear, color: Colors.red),
             color: Colors.black54,
             onPressed: ()async{
+
               bool payLater = await showDialog(
                   context: context,
                   child: AlertDialog(
@@ -75,8 +76,9 @@ class _VerifyIdeaState extends State<VerifyIdea> {
                     ),
                   )
               );
+
               if(payLater) {
-                await Navigator.pushReplacement(
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (_) => Orders()
                     )
@@ -90,7 +92,7 @@ class _VerifyIdeaState extends State<VerifyIdea> {
           InAppWebView(
             initialUrl: url,
             initialHeaders: {},
-            initialOptions: new InAppWebViewWidgetOptions(androidInAppWebViewOptions: AndroidInAppWebViewOptions(textZoom: 120)),
+            initialOptions: new InAppWebViewGroupOptions(android: AndroidInAppWebViewOptions(textZoom: 120)),
             onWebViewCreated: (InAppWebViewController controller) {
               webView = controller;
             },

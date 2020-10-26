@@ -22,8 +22,7 @@ class NotifyManager {
   MethodChannel('crossingthestreams.io/resourceResolver');
 
   static Future initializeLocalNotification()async{
-    notificationAppLaunchDetails =
-    await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+    notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
 
     var initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher');
     // Note: permissions aren't requested here just to demonstrate that can be done later using the `requestPermissions()` method
